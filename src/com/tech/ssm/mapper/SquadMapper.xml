@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tech.ssm.mapper.SquadMapper">
+	<resultMap id="SquadMap" type="com.tech.ssm.domain.squad">
+		<id column="squad_id" jdbcType="VARCHAR" property="squad_id" />
+		<result column="squad_teachar" jdbcType="VARCHAR" property="squad_teachar" />
+		<result column="squad_name" jdbcType="VARCHAR" property="squad_name" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		squad_id,squad_name
+	</sql>
+	
+	<!-- 根据id查 -->
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="SquadMap">
+		select
+		<include refid="Base_Column_List" />
+		from squad
+		where squad_id = #{squad_id,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from squad
+		where squad_id = #{squad_id,jdbcType=VARCHAR}
+	</delete>
+	
+	<!-- 增加 -->
+	<insert id="insert" parameterType="com.tech.ssm.domain.Squad">
+		insert into squad (squad_id, squad_teachar,squad_name)
+		values (#{squad_id,jdbcType=VARCHAR}, #{squad_teachar,jdbcType=VARCHAR},#{squad_name,jdbcType=VARCHAR})
+	</insert>
+	
+	
+	<insert id="insertSelective"
+		parameterType="com.tech.ssm.domain.Squad">
+		insert into squad
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="squad_id != null">
+				squad_id,
+			</if>
+			<if test="squad_teachar != null">
+				squad_teachar,
+			</if>
+			<if test="squad_name != null">
+				squad_name,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="squad_id != null">
+				#{squad_id,jdbcType=VARCHAR},
+			</if>
+			<if test="squad_teachar != null">
+				#{squad_teachar,jdbcType=VARCHAR},
+			</if>
+			<if test="squad_name != null">
+				#{squad_name,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.tech.ssm.domain.Squad">
+		update squad
+		<set>
+		<if test="squad_teachar != null">
+				squad_teachar = #{squad_teachar,jdbcType=VARCHAR},
+			</if>
+			<if test="squad_name != null">
+				squad_name = #{squad_name,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where squad_id = #{squad_id,jdbcType=VARCHAR}
+	</update>
+	<!-- 更新 -->
+	<update id="updateByPrimaryKey"
+		parameterType="com.tech.ssm.domain.Squad">
+		update squad
+		set squad_teachar = #{squad_teachar,jdbcType=VARCHAR}, squad_name = #{squad_name,jdbcType=VARCHAR}
+		where squad_id = #{squad_id,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 模糊查询 -->
+	<select id="queryAll" resultMap="SquadMap">
+		select
+		<include refid="Base_Column_List" />
+		from squad
+		<where>
+			<if test="squad_id!=null and squad_id!=''">
+				and squad_id like concat("%",#{squad_id},"%")
+			</if>
+			<if test="squad_teachar!=null and squad_teachar!=''">
+				and squad_teachar like concat("%",#{squad_id},"%")
+			</if>
+			<if test="squad_name!=null and squad_name!=''">
+				and squad_name like concat("%",#{squad_name},"%")
+			</if>
+		</where>
+	</select>
+	
+</mapper>

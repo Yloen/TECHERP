@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tech.ssm.mapper.ResourcesMapper">
+	<resultMap id="ResourcesMap" type="com.tech.ssm.domain.Resources">
+		<id column="resources_id" jdbcType="VARCHAR" property="resources_id" />
+		<result column="resources_name" jdbcType="VARCHAR" property="resources_name" />
+		<result column="resources_type" jdbcType="VARCHAR" property="resources_type" />
+		<result column="resources_details" jdbcType="VARCHAR" property="resources_details" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		resources_id, resources_name, resources_type, resources_details
+	</sql>
+	
+	<!-- 根据id查 -->
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="ResourcesMap">
+		select
+		<include refid="Base_Column_List" />
+		from resources
+		where resources_id = #{resources_id,jdbcType=VARCHAR} 
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from resources
+		where resources_id = #{resources_id,jdbcType=VARCHAR}
+	</delete>
+	
+	<!-- 增加 -->
+	<insert id="insert" parameterType="com.tech.ssm.domain.Resources">
+		insert into resources (resources_id, resources_name, resources_type,
+		resources_details)
+		values (#{resources_id,jdbcType=VARCHAR}, #{resources_name,jdbcType=VARCHAR},
+		#{resources_type,jdbcType=VARCHAR},#{resources_details,jdbcType=VARCHAR})
+	</insert>
+	
+	
+	<insert id="insertSelective"
+		parameterType="com.tech.ssm.domain.Resources">
+		insert into resources
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="resources_id != null">
+				resources_id,
+			</if>
+			<if test="resources_name != null">
+				resources_name,
+			</if>
+			<if test="resources_type != null">
+				resources_type,
+			</if>
+			<if test="resources_details != null">
+				resources_details,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="resources_id != null">
+				#{resources_id,jdbcType=VARCHAR},
+			</if>
+			<if test="resources_name != null">
+				#{resources_name,jdbcType=VARCHAR},
+			</if>
+			<if test="resources_type != null">
+				#{resources_type,jdbcType=VARCHAR},
+			</if>
+			<if test="resources_details != null">
+				#{resources_details,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.tech.ssm.domain.Resources">
+		update resources
+		<set>
+			<if test="resources_name != null">
+				resources_name = #{resources_name,jdbcType=VARCHAR},
+			</if>
+			<if test="resources_type != null">
+				resources_type = #{resources_type,jdbcType=VARCHAR},
+			</if>
+			<if test="resources_details != null">
+				resources_details = #{resources_details,jdbcType=VARCHAR},
+			</if>
+			
+		</set>
+		where resources_id = #{resources_id,jdbcType=VARCHAR}
+	</update>
+	
+	
+	<!-- 更新 -->
+	<update id="updateByPrimaryKey"
+		parameterType="com.tech.ssm.domain.Resources">
+		update resources
+		set resources_name = #{resources_name,jdbcType=VARCHAR},
+		resources_type = #{resources_type,jdbcType=VARCHAR},
+		resources_details = #{resources_details,jdbcType=VARCHAR}
+		where resources_id = #{resources_id,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 模糊查询 -->
+	<select id="queryAll" resultMap="ResourcesMap">
+		select
+		<include refid="Base_Column_List" />
+		from resources
+		<where>
+			<if test="resources_id !=null and resources_id!=''">
+				and resources_id like concat("%",#{resources_id},"%")
+			</if>
+			<if test="resources_name !=null and resources_name !=''">
+				and resources_name like concat("%",#{resources_name},"%")
+			</if>
+			<if test="resources_type !=null and resources_type !=''">
+				and resources_type like concat("%",#{resources_type},"%")
+			</if>
+			<if test="resources_details !=null and resources_details !=''">
+				and resources_details like concat("%",#{resources_details},"%")
+			</if>
+		</where>
+	</select>
+	
+</mapper>

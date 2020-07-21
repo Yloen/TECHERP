@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tech.ssm.mapper.TeacherMapper">
+	<resultMap id="BaseResultMap" type="com.tech.ssm.domain.Teacher">
+		<id column="teacher_id" jdbcType="VARCHAR" property="teacher_id" />
+		<result column="teacher_name" jdbcType="VARCHAR" property="teacher_name" />
+		<result column="teacher_sex" jdbcType="VARCHAR" property="teacher_sex" />
+		<result column="teacher_title" jdbcType="VARCHAR" property="teacher_title" />
+		<result column="teacher_phone" jdbcType="VARCHAR"
+			property="teacher_phone" />
+		<result column="teacher_college" jdbcType="VARCHAR" 
+			property="teacher_college" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		teacher_id, teacher_name, teacher_sex, teacher_title, teacher_phone,
+		teacher_college
+	</sql>
+	
+	<!-- 根据id查 -->
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from teacher
+		where teacher_id = #{teacher_id,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from teacher
+		where teacher_id = #{teacher_id,jdbcType=VARCHAR}
+	</delete>
+	
+	<!-- 增加 -->
+	<insert id="insert" parameterType="com.tech.ssm.domain.Teacher">
+		insert into teacher (teacher_id, teacher_name, teacher_sex,
+		teacher_title, teacher_phone,teacher_college)
+		values (#{teacher_id,jdbcType=VARCHAR}, #{teacher_name,jdbcType=VARCHAR},
+		#{teacher_sex,jdbcType=VARCHAR},#{teacher_title,jdbcType=VARCHAR},
+		#{teacher_phone,jdbcType=VARCHAR},#{teacher_college,jdbcType=VARCHAR})
+	</insert>
+	
+	
+	<insert id="insertSelective"
+		parameterType="com.tech.ssm.domain.Teacher">
+		insert into teacher
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="teacher_id != null">
+				teacher_id,
+			</if>
+			<if test="teacher_name != null">
+				teacher_name,
+			</if>
+			<if test="teacher_sex != null">
+				teacher_sex,
+			</if>
+			<if test="teacher_title != null">
+				teacher_title,
+			</if>
+			<if test="teacher_phone != null">
+				teacher_phone,
+			</if>
+			<if test="teacher_college != null">
+				teacher_college,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="teacher_id != null">
+				#{teacher_id,jdbcType=VARCHAR},
+			</if>
+			<if test="teacher_name != null">
+				#{teacher_name,jdbcType=VARCHAR},
+			</if>
+			<if test="teacher_sex != null">
+				#{teacher_sex,jdbcType=VARCHAR},
+			</if>
+			<if test="teacher_title != null">
+				#{teacher_title,jdbcType=VARCHAR},
+			</if>
+			<if test="teacher_phone != null">
+				#{teacher_phone,jdbcType=VARCHAR},
+			</if>
+			<if test="teacher_college != null">
+				#{teacher_college,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.tech.ssm.domain.Teacher">
+		update teacher
+		<set>
+			<if test="teacher_name != null">
+				teacher_name = #{teacher_name,jdbcType=VARCHAR},
+			</if>
+			<if test="teacher_sex != null">
+				teacher_sex = #{teacher_sex,jdbcType=VARCHAR},
+			</if>
+			<if test="teacher_title != null">
+				teacher_title = #{teacher_title,jdbcType=VARCHAR},
+			</if>
+			<if test="teacher_phone != null">
+				teacher_phone = #{teacher_phone,jdbcType=VARCHAR},
+			</if>
+			<if test="teacher_college != null">
+				teacher_college = #{teacher_college,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where teacher_id = #{teacher_id,jdbcType=VARCHAR}
+	</update>
+	<!-- 更新 -->
+	<update id="updateByPrimaryKey"
+		parameterType="com.tech.ssm.domain.Teacher">
+		update teacher
+		set teacher_name = #{teacher_name,jdbcType=VARCHAR},
+		teacher_sex = #{teacher_sex,jdbcType=VARCHAR},
+		teacher_title = #{teacher_title,jdbcType=VARCHAR},
+		teacher_phone = #{teacher_phone,jdbcType=VARCHAR},
+		teacher_college = #{teacher_college,jdbcType=VARCHAR}
+		where teacher_id = #{teacher_id,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 模糊查询 -->
+	<select id="queryAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from teacher
+		<where>
+			<if test="teacher_id!=null and teacher_id!=''">
+				and teacher_id like concat("%",#{teacher_id},"%")
+			</if>
+			<if test="teacher_name!=null and teacher_name!=''">
+				and teacher_name like concat("%",#{teacher_name},"%")
+			</if>
+			<if test="teacher_sex!=null and teacher_sex!=''">
+				and teacher_sex like concat("%",#{teacher_sex},"%")
+			</if>
+			<if test="teacher_title!=null and teacher_title!=''">
+				and teacher_title like concat("%",#{teacher_title},"%")
+			</if>
+			<if test="teacher_phone!=null and teacher_phone!=''">
+				and teacher_phone like concat("%",#{teacher_phone},"%")
+			</if>
+			<if test="teacher_college!=null and teacher_college!=''">
+				and teacher_college like concat("%",#{teacher_college},"%")
+			</if>
+		</where>
+	</select>
+	
+</mapper>

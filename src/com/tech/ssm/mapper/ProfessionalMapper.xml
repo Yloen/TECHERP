@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tech.ssm.mapper.ProfessionalMapper">
+	<resultMap id="BaseResultMap" type="com.tech.ssm.domain.Professional">
+		<id column="professional_id" jdbcType="VARCHAR" property="professional_id" />
+		<result column="professional_name" jdbcType="VARCHAR" property="professional_name" />
+		<result column="professional_college" jdbcType="VARCHAR" property="professional_college" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		professional_id,professional_name,professional_college
+	</sql>
+	
+	<!-- 根据id查 -->
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from professional
+		where professional_id = #{professional_id,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from professional
+		where professional_id = #{professional_id,jdbcType=VARCHAR}
+	</delete>
+	
+	<!-- 增加 -->
+	<insert id="insert" parameterType="com.tech.ssm.domain.Professional">
+		insert into professional (professional_id, professional_name, professional_college)
+		values (#{professional_id,jdbcType=VARCHAR}, #{professional_name,jdbcType=VARCHAR},
+		#{professional_college,jdbcType=VARCHAR})
+	</insert>
+	
+	
+	<insert id="insertSelective"
+		parameterType="com.tech.ssm.domain.Professional">
+		insert into professional
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="professional_id != null">
+				professional_id,
+			</if>
+			<if test="professional_name != null">
+				professional_name,
+			</if>
+			<if test="professional_college != null">
+				professional_college,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="professional_id != null">
+				#{professional_id,jdbcType=VARCHAR},
+			</if>
+			<if test="professional_name != null">
+				#{professional_name,jdbcType=VARCHAR},
+			</if>
+			<if test="professional_college != null">
+				#{professional_college,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.tech.ssm.domain.Professional">
+		update professional
+		<set>
+			<if test="professional_name != null">
+				professional_name = #{professional_name,jdbcType=VARCHAR},
+			</if>
+			<if test="professional_college != null">
+				professional_college = #{professional_college,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where professional_id = #{professional_id,jdbcType=VARCHAR}
+	</update>
+	<!-- 更新 -->
+	<update id="updateByPrimaryKey"
+		parameterType="com.tech.ssm.domain.Professional">
+		update professional
+		set professional_name = #{professional_name,jdbcType=VARCHAR},
+		professional_college = #{professional_college,jdbcType=VARCHAR}
+		where professional_id = #{professional_id,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 模糊查询 -->
+	<select id="queryAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from professional
+		<where>
+			<if test="professional_id!=null and professional_id!=''">
+				and professional_id like concat("%",#{professional_id},"%")
+			</if>
+			<if test="professional_name!=null and professional_name!=''">
+				and professional_name like concat("%",#{professional_name},"%")
+			</if>
+			<if test="professional_college!=null and professional_college!=''">
+				and professional_college like concat("%",#{professional_college},"%")
+			</if>
+		</where>
+	</select>
+	
+</mapper>

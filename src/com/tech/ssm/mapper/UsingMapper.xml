@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="com.tech.ssm.mapper.UsingMapper">
+	<resultMap id="UsingMap" type="com.tech.ssm.domain.using">
+		<id column="using_id" jdbcType="VARCHAR" property="using_id" />
+		<result column="using_start" jdbcType="TIMESTAMP" property="using_strat" />
+		<result column="using_end" jdbcType="TIMESTAMP"  property="using_end" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		using_id, using_start, using_end
+	</sql>
+	
+	<!-- 根据id查 -->
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="UsingMap">
+		select
+		<include refid="Base_Column_List" />
+		from using
+		where using_id = #{using_id,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from using
+		where using_id = #{using_id,jdbcType=VARCHAR}
+	</delete>
+	
+	<!-- 增加 -->
+	<insert id="insert" parameterType="com.tech.ssm.domain.Using">
+		insert into using (using_id,using_start,using_end)
+		values (#{using_id,jdbcType=VARCHAR},#{using_start,jdbcType=TIMESTAMP},#{using_end,jdbcType=TIMESTAMP})
+	</insert>
+	
+	
+	<insert id="insertSelective"
+		parameterType="com.tech.ssm.domain.Using">
+		insert into using
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="using_id != null">
+				using_id,
+			</if>
+			<if test="using_start != null">
+				using_start,
+			</if>
+			<if test="using_end != null">
+				using_end,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="using_id != null">
+				#{using_id,jdbcType=VARCHAR},
+			</if>
+			<if test="using_start != null">
+				#{using_start,jdbcType=TIMESTAMP},
+			</if>
+			<if test="using_end != null">
+				#{using_end,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.tech.ssm.domain.Using">
+		update using
+		<set>
+			<if test="using_start != null">
+				using_start = #{using_start,jdbcType=TIMESTAMP},
+			</if>
+			<if test="using_end != null">
+				using_end = #{using_end,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where using_id = #{using_id,jdbcType=VARCHAR}
+	</update>
+	<!-- 更新 -->
+	<update id="updateByPrimaryKey"
+		parameterType="com.tech.ssm.domain.Using">
+		update using
+		set 
+		using_start = #{using_start,jdbcType=TIMESTAMP},
+		using_end = #{using_end,jdbcType=TIMESTAMP}
+		where using_id = #{using_id,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 模糊查询 -->
+	<select id="queryAll" resultMap="UsingMap">
+		select
+		<include refid="Base_Column_List" />
+		from using
+		<where>
+			<if test="using_id!=null and using_id!=''">
+				and using_id like concat("%",#{using_id},"%")
+			</if>
+			<if test="using_start!=null and using_start!=''">
+				and using_start like concat("%",#{using_start},"%")
+			</if>
+			<if test="using_end!=null and using_end!=''">
+				and using_end like concat("%",#{using_end},"%")
+			</if>
+		</where>
+	</select>
+	
+</mapper>
