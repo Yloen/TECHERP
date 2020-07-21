@@ -17,7 +17,7 @@ public class StudentController {
 	@Autowired
 	private StudentService studnetservice;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/list.do")
 	@ResponseBody
 	public List<Student> studentlist(Student student){
 		List<Student> studentlist=studnetservice.queryAll(student);
@@ -25,7 +25,7 @@ public class StudentController {
 	}
 	
 	
-	@RequestMapping("/select_by_id")
+	@RequestMapping("/select_by_id.do")
 	@ResponseBody
 	public Student selectByPrimaryKey(String student_id){
 		Student student=studnetservice.selectByPrimaryKey(student_id);
@@ -33,35 +33,35 @@ public class StudentController {
 	}
 	
 	
-	@RequestMapping(value="/delete_id")
+	@RequestMapping(value="/delete_id.do")
 	@ResponseBody
 	private int Delete(String student_id) {
 		return studnetservice.deleteByPrimaryKey(student_id);
 		
 	}
 	
-	@RequestMapping(value="/insert")
+	@RequestMapping(value="/insert.do")
 	@ResponseBody
 	private int Insert(Student student) {
 		return studnetservice.insert(student);
 		
 	}
 	
-	@RequestMapping(value="/insertSelective")
+	@RequestMapping(value="/insertSelective.do")
 	@ResponseBody
 	private int InsertSelective(Student student) {
 		return studnetservice.insertSelective(student);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id_Selective")
+	@RequestMapping(value="/update_by_id_Selective.do")
 	@ResponseBody
 	private int updateByPrimaryKeySelective(Student student) {
 		return studnetservice.updateByPrimaryKeySelective(student);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id")
+	@RequestMapping(value="/update_by_id.do")
 	@ResponseBody
 	private int updateById(Student student) {
 		return studnetservice.updateByPrimaryKey(student);

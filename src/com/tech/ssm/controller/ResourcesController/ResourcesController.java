@@ -17,7 +17,7 @@ public class ResourcesController {
 	@Autowired
 	private ResourcesService resourcesservice;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/list.do")
 	@ResponseBody
 	public List<Resources> Resourceslist(Resources resources){
 		List<Resources> resourceslist=resourcesservice.queryAll(resources);
@@ -25,7 +25,7 @@ public class ResourcesController {
 	}
 	
 	
-	@RequestMapping("/select_by_id")
+	@RequestMapping("/select_by_id.do")
 	@ResponseBody
 	public Resources selectByPrimaryKey(String resources_id){
 		Resources resources=resourcesservice.selectByPrimaryKey(resources_id);
@@ -33,35 +33,35 @@ public class ResourcesController {
 	}
 	
 	
-	@RequestMapping(value="/delete_id")
+	@RequestMapping(value="/delete_id.do")
 	@ResponseBody
 	private int Delete(String resources_id) {
 		return resourcesservice.deleteByPrimaryKey(resources_id);
 		
 	}
 	
-	@RequestMapping(value="/insert")
+	@RequestMapping(value="/insert.do")
 	@ResponseBody
 	private int Insert(Resources resources) {
 		return resourcesservice.insert(resources);
 		
 	}
 	
-	@RequestMapping(value="/insertSelective")
+	@RequestMapping(value="/insertSelective.do")
 	@ResponseBody
 	private int InsertSelective(Resources resources) {
 		return resourcesservice.insertSelective(resources);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id_Selective")
+	@RequestMapping(value="/update_by_id_Selective.do")
 	@ResponseBody
 	private int updateByPrimaryKeySelective(Resources resources) {
 		return resourcesservice.updateByPrimaryKeySelective(resources);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id")
+	@RequestMapping(value="/update_by_id.do")
 	@ResponseBody
 	private int updateById(Resources resources) {
 		return resourcesservice.updateByPrimaryKey(resources);

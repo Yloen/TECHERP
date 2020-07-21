@@ -17,7 +17,7 @@ public class AdmissionsController {
 	@Autowired
 	private AdmissionsService admissionsservice;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/list.do")
 	@ResponseBody
 	public List<Admissions> admissionslist(Admissions admissions){
 		List<Admissions> admissionslist=admissionsservice.queryAll(admissions);
@@ -25,7 +25,7 @@ public class AdmissionsController {
 	}
 	
 	
-	@RequestMapping("/select_by_id")
+	@RequestMapping("/select_by_id.do")
 	@ResponseBody
 	public Admissions selectByPrimaryKey(String admissions_id){
 		Admissions admissions=admissionsservice.selectByPrimaryKey(admissions_id);
@@ -33,35 +33,35 @@ public class AdmissionsController {
 	}
 	
 	
-	@RequestMapping(value="/delete_id")
+	@RequestMapping(value="/delete_id.do")
 	@ResponseBody
 	private int Delete(String admissions_id) {
 		return admissionsservice.deleteByPrimaryKey(admissions_id);
 		
 	}
 	
-	@RequestMapping(value="/insert")
+	@RequestMapping(value="/insert.do")
 	@ResponseBody
 	private int Insert(Admissions admissions) {
 		return admissionsservice.insert(admissions);
 		
 	}
 	
-	@RequestMapping(value="/insertSelective")
+	@RequestMapping(value="/insertSelective.do")
 	@ResponseBody
 	private int InsertSelective(Admissions admissions) {
 		return admissionsservice.insertSelective(admissions);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id_Selective")
+	@RequestMapping(value="/update_by_id_Selective.do")
 	@ResponseBody
 	private int updateByPrimaryKeySelective(Admissions admissions) {
 		return admissionsservice.updateByPrimaryKeySelective(admissions);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id")
+	@RequestMapping(value="/update_by_id.do")
 	@ResponseBody
 	private int updateById(Admissions admissions) {
 		return admissionsservice.updateByPrimaryKey(admissions);

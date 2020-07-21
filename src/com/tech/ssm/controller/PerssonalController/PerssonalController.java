@@ -17,7 +17,7 @@ public class PerssonalController {
 	@Autowired
 	private PersonalService personalservice;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/list.do")
 	@ResponseBody
 	public List<Personal> personallist(Personal personal){
 		List<Personal> personallist=personalservice.queryAll(personal);
@@ -25,7 +25,7 @@ public class PerssonalController {
 	}
 	
 	
-	@RequestMapping("/select_by_id")
+	@RequestMapping("/select_by_id.do")
 	@ResponseBody
 	public Personal selectByPrimaryKey(String personal_id){
 		Personal personal=personalservice.selectByPrimaryKey(personal_id);
@@ -33,35 +33,35 @@ public class PerssonalController {
 	}
 	
 	
-	@RequestMapping(value="/delete_id")
+	@RequestMapping(value="/delete_id.do")
 	@ResponseBody
 	private int Delete(String personal_id) {
 		return personalservice.deleteByPrimaryKey(personal_id);
 		
 	}
 	
-	@RequestMapping(value="/insert")
+	@RequestMapping(value="/insert.do")
 	@ResponseBody
 	private int Insert(Personal personal) {
 		return personalservice.insert(personal);
 		
 	}
 	
-	@RequestMapping(value="/insertSelective")
+	@RequestMapping(value="/insertSelective.do")
 	@ResponseBody
 	private int InsertSelective(Personal personal) {
 		return personalservice.insertSelective(personal);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id_Selective")
+	@RequestMapping(value="/update_by_id_Selective.do")
 	@ResponseBody
 	private int updateByPrimaryKeySelective(Personal personal) {
 		return personalservice.updateByPrimaryKeySelective(personal);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id")
+	@RequestMapping(value="/update_by_id.do")
 	@ResponseBody
 	private int updateById(Personal personal) {
 		return personalservice.updateByPrimaryKey(personal);

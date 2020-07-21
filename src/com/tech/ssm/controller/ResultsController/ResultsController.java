@@ -17,7 +17,7 @@ public class ResultsController {
 	@Autowired
 	private ResultsService resultsservice;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/list.do")
 	@ResponseBody
 	public List<Results> Resultslist(Results results){
 		List<Results> resultslist=resultsservice.queryAll(results);
@@ -25,7 +25,7 @@ public class ResultsController {
 	}
 	
 	
-	@RequestMapping("/select_by_id")
+	@RequestMapping("/select_by_id.do")
 	@ResponseBody
 	public Results selectByPrimaryKey(String results_id){
 		Results results=resultsservice.selectByPrimaryKey(results_id);
@@ -33,35 +33,35 @@ public class ResultsController {
 	}
 	
 	
-	@RequestMapping(value="/delete_id")
+	@RequestMapping(value="/delete_id.do")
 	@ResponseBody
 	private int Delete(String results_id) {
 		return resultsservice.deleteByPrimaryKey(results_id);
 		
 	}
 	
-	@RequestMapping(value="/insert")
+	@RequestMapping(value="/insert.do")
 	@ResponseBody
 	private int Insert(Results results) {
 		return resultsservice.insert(results);
 		
 	}
 	
-	@RequestMapping(value="/insertSelective")
+	@RequestMapping(value="/insertSelective.do")
 	@ResponseBody
 	private int InsertSelective(Results results) {
 		return resultsservice.insertSelective(results);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id_Selective")
+	@RequestMapping(value="/update_by_id_Selective.do")
 	@ResponseBody
 	private int updateByPrimaryKeySelective(Results results) {
 		return resultsservice.updateByPrimaryKeySelective(results);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id")
+	@RequestMapping(value="/update_by_id.do")
 	@ResponseBody
 	private int updateById(Results results) {
 		return resultsservice.updateByPrimaryKey(results);

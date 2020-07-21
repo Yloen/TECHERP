@@ -17,7 +17,7 @@ public class ProfessionalController {
 	@Autowired
 	private ProfessionalService professionalservice;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/list.do")
 	@ResponseBody
 	public List<Professional> Professionallist(Professional professional){
 		List<Professional> professionallist=professionalservice.queryAll(professional);
@@ -25,7 +25,7 @@ public class ProfessionalController {
 	}
 	
 	
-	@RequestMapping("/select_by_id")
+	@RequestMapping("/select_by_id.do")
 	@ResponseBody
 	public Professional selectByPrimaryKey(String professional_id){
 		Professional professional=professionalservice.selectByPrimaryKey(professional_id);
@@ -40,28 +40,28 @@ public class ProfessionalController {
 		
 	}
 	
-	@RequestMapping(value="/insert")
+	@RequestMapping(value="/insert.do")
 	@ResponseBody
 	private int Insert(Professional professional) {
 		return professionalservice.insert(professional);
 		
 	}
 	
-	@RequestMapping(value="/insertSelective")
+	@RequestMapping(value="/insertSelective.do")
 	@ResponseBody
 	private int InsertSelective(Professional professional) {
 		return professionalservice.insertSelective(professional);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id_Selective")
+	@RequestMapping(value="/update_by_id_Selective.do")
 	@ResponseBody
 	private int updateByPrimaryKeySelective(Professional professional) {
 		return professionalservice.updateByPrimaryKeySelective(professional);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id")
+	@RequestMapping(value="/update_by_id.do")
 	@ResponseBody
 	private int updateById(Professional professional) {
 		return professionalservice.updateByPrimaryKey(professional);

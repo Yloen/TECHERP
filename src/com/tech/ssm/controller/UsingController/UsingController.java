@@ -17,7 +17,7 @@ public class UsingController {
 	@Autowired
 	private UsingService usingservice;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/list.do")
 	@ResponseBody
 	public List<Using> Usinglist(Using using){
 		List<Using> Usinglist=usingservice.queryAll(using);
@@ -25,7 +25,7 @@ public class UsingController {
 	}
 	
 	
-	@RequestMapping("/select_by_id")
+	@RequestMapping("/select_by_id.do")
 	@ResponseBody
 	public Using selectByPrimaryKey(String using_id){
 		Using Using=usingservice.selectByPrimaryKey(using_id);
@@ -33,35 +33,35 @@ public class UsingController {
 	}
 	
 	
-	@RequestMapping(value="/delete_id")
+	@RequestMapping(value="/delete_id.do")
 	@ResponseBody
 	private int Delete(String using_id) {
 		return usingservice.deleteByPrimaryKey(using_id);
 		
 	}
 	
-	@RequestMapping(value="/insert")
+	@RequestMapping(value="/insert.do")
 	@ResponseBody
 	private int Insert(Using using) {
 		return usingservice.insert(using);
 		
 	}
 	
-	@RequestMapping(value="/insertSelective")
+	@RequestMapping(value="/insertSelective.do")
 	@ResponseBody
 	private int InsertSelective(Using using) {
 		return usingservice.insertSelective(using);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id_Selective")
+	@RequestMapping(value="/update_by_id_Selective.do")
 	@ResponseBody
 	private int updateByPrimaryKeySelective(Using using) {
 		return usingservice.updateByPrimaryKeySelective(using);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id")
+	@RequestMapping(value="/update_by_id.do")
 	@ResponseBody
 	private int updateById(Using using) {
 		return usingservice.updateByPrimaryKey(using);

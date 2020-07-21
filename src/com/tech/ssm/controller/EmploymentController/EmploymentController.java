@@ -17,7 +17,7 @@ public class EmploymentController {
 	@Autowired
 	private EmploymentService employmentservice;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/list.do")
 	@ResponseBody
 	public List<Employment> employmentlist(Employment employment){
 		List<Employment> employmentlist=employmentservice.queryAll(employment);
@@ -25,7 +25,7 @@ public class EmploymentController {
 	}
 	
 	
-	@RequestMapping("/select_by_id")
+	@RequestMapping("/select_by_id.do")
 	@ResponseBody
 	public Employment selectByPrimaryKey(String employment_id){
 		Employment employment=employmentservice.selectByPrimaryKey(employment_id);
@@ -33,35 +33,35 @@ public class EmploymentController {
 	}
 	
 	
-	@RequestMapping(value="/delete_id")
+	@RequestMapping(value="/delete_id.do")
 	@ResponseBody
 	private int Delete(String employment_id) {
 		return employmentservice.deleteByPrimaryKey(employment_id);
 		
 	}
 	
-	@RequestMapping(value="/insert")
+	@RequestMapping(value="/insert.do")
 	@ResponseBody
 	private int Insert(Employment employment) {
 		return employmentservice.insert(employment);
 		
 	}
 	
-	@RequestMapping(value="/insertSelective")
+	@RequestMapping(value="/insertSelective.do")
 	@ResponseBody
 	private int InsertSelective(Employment employment) {
 		return employmentservice.insertSelective(employment);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id_Selective")
+	@RequestMapping(value="/update_by_id_Selective.do")
 	@ResponseBody
 	private int updateByPrimaryKeySelective(Employment employment) {
 		return employmentservice.updateByPrimaryKeySelective(employment);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id")
+	@RequestMapping(value="/update_by_id.do")
 	@ResponseBody
 	private int updateById(Employment employment) {
 		return employmentservice.updateByPrimaryKey(employment);

@@ -17,7 +17,7 @@ public class CourseController {
 	@Autowired
 	private CourseService courseservice;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/list.do")
 	@ResponseBody
 	public List<Course> courselist(Course course){
 		List<Course> courselist=courseservice.queryAll(course);
@@ -25,7 +25,7 @@ public class CourseController {
 	}
 	
 	
-	@RequestMapping("/select_by_id")
+	@RequestMapping("/select_by_id.do")
 	@ResponseBody
 	public Course selectByPrimaryKey(String course_id){
 		Course course=courseservice.selectByPrimaryKey(course_id);
@@ -33,35 +33,35 @@ public class CourseController {
 	}
 	
 	
-	@RequestMapping(value="/delete_id")
+	@RequestMapping(value="/delete_id.do")
 	@ResponseBody
 	private int Delete(String course_id) {
 		return courseservice.deleteByPrimaryKey(course_id);
 		
 	}
 	
-	@RequestMapping(value="/insert")
+	@RequestMapping(value="/insert.do")
 	@ResponseBody
 	private int Insert(Course course) {
 		return courseservice.insert(course);
 		
 	}
 	
-	@RequestMapping(value="/insertSelective")
+	@RequestMapping(value="/insertSelective.do")
 	@ResponseBody
 	private int InsertSelective(Course course) {
 		return courseservice.insertSelective(course);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id_Selective")
+	@RequestMapping(value="/update_by_id_Selective.do")
 	@ResponseBody
 	private int updateByPrimaryKeySelective(Course course) {
 		return courseservice.updateByPrimaryKeySelective(course);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id")
+	@RequestMapping(value="/update_by_id.do")
 	@ResponseBody
 	private int updateById(Course course) {
 		return courseservice.updateByPrimaryKey(course);

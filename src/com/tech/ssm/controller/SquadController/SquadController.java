@@ -17,7 +17,7 @@ public class SquadController {
 	@Autowired
 	private SquadService squadservice;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/list.do")
 	@ResponseBody
 	public List<Squad> squadlist(Squad squad){
 		List<Squad> squadlist=squadservice.queryAll(squad);
@@ -25,7 +25,7 @@ public class SquadController {
 	}
 	
 	
-	@RequestMapping("/select_by_id")
+	@RequestMapping("/select_by_id.do")
 	@ResponseBody
 	public Squad selectByPrimaryKey(String squad_id){
 		Squad squad=squadservice.selectByPrimaryKey(squad_id);
@@ -33,35 +33,35 @@ public class SquadController {
 	}
 	
 	
-	@RequestMapping(value="/delete_id")
+	@RequestMapping(value="/delete_id.do")
 	@ResponseBody
 	private int Delete(String squad_id) {
 		return squadservice.deleteByPrimaryKey(squad_id);
 		
 	}
 	
-	@RequestMapping(value="/insert")
+	@RequestMapping(value="/insert.do")
 	@ResponseBody
 	private int Insert(Squad squad) {
 		return squadservice.insert(squad);
 		
 	}
 	
-	@RequestMapping(value="/insertSelective")
+	@RequestMapping(value="/insertSelective.do")
 	@ResponseBody
 	private int InsertSelective(Squad squad) {
 		return squadservice.insertSelective(squad);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id_Selective")
+	@RequestMapping(value="/update_by_id_Selective.do")
 	@ResponseBody
 	private int updateByPrimaryKeySelective(Squad squad) {
 		return squadservice.updateByPrimaryKeySelective(squad);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id")
+	@RequestMapping(value="/update_by_id.do")
 	@ResponseBody
 	private int updateById(Squad squad) {
 		return squadservice.updateByPrimaryKey(squad);

@@ -17,7 +17,7 @@ public class TeacherController {
 	@Autowired
 	private TeacherService teacherservice;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/list.do")
 	@ResponseBody
 	public List<Teacher> Teacherlist(Teacher teacher){
 		List<Teacher> Teacherlist=teacherservice.queryAll(teacher);
@@ -25,7 +25,7 @@ public class TeacherController {
 	}
 	
 	
-	@RequestMapping("/select_by_id")
+	@RequestMapping("/select_by_id.do")
 	@ResponseBody
 	public Teacher selectByPrimaryKey(String teacher_id){
 		Teacher Teacher=teacherservice.selectByPrimaryKey(teacher_id);
@@ -33,35 +33,35 @@ public class TeacherController {
 	}
 	
 	
-	@RequestMapping(value="/delete_id")
+	@RequestMapping(value="/delete_id.do")
 	@ResponseBody
 	private int Delete(String teacher_id) {
 		return teacherservice.deleteByPrimaryKey(teacher_id);
 		
 	}
 	
-	@RequestMapping(value="/insert")
+	@RequestMapping(value="/insert.do")
 	@ResponseBody
 	private int Insert(Teacher teacher) {
 		return teacherservice.insert(teacher);
 		
 	}
 	
-	@RequestMapping(value="/insertSelective")
+	@RequestMapping(value="/insertSelective.do")
 	@ResponseBody
 	private int InsertSelective(Teacher teacher) {
 		return teacherservice.insertSelective(teacher);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id_Selective")
+	@RequestMapping(value="/update_by_id_Selective.do")
 	@ResponseBody
 	private int updateByPrimaryKeySelective(Teacher teacher) {
 		return teacherservice.updateByPrimaryKeySelective(teacher);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id")
+	@RequestMapping(value="/update_by_id.do")
 	@ResponseBody
 	private int updateById(Teacher teacher) {
 		return teacherservice.updateByPrimaryKey(teacher);

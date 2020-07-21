@@ -17,7 +17,7 @@ public class PlanTypeController {
 	@Autowired
 	private PlanTypeService plantypeservice;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/list.do")
 	@ResponseBody
 	public List<PlanType> PlanTypelist(PlanType planType){
 		List<PlanType> planTypelist=plantypeservice.queryAll(planType);
@@ -25,7 +25,7 @@ public class PlanTypeController {
 	}
 	
 	
-	@RequestMapping("/select_by_id")
+	@RequestMapping("/select_by_id.do")
 	@ResponseBody
 	public PlanType selectByPrimaryKey(String planType_id){
 		PlanType planType=plantypeservice.selectByPrimaryKey(planType_id);
@@ -33,35 +33,35 @@ public class PlanTypeController {
 	}
 	
 	
-	@RequestMapping(value="/delete_id")
+	@RequestMapping(value="/delete_id.do")
 	@ResponseBody
 	private int Delete(String planType_id) {
 		return plantypeservice.deleteByPrimaryKey(planType_id);
 		
 	}
 	
-	@RequestMapping(value="/insert")
+	@RequestMapping(value="/insert.do")
 	@ResponseBody
 	private int Insert(PlanType planType) {
 		return plantypeservice.insert(planType);
 		
 	}
 	
-	@RequestMapping(value="/insertSelective")
+	@RequestMapping(value="/insertSelective.do")
 	@ResponseBody
 	private int InsertSelective(PlanType planType) {
 		return plantypeservice.insertSelective(planType);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id_Selective")
+	@RequestMapping(value="/update_by_id_Selective.do")
 	@ResponseBody
 	private int updateByPrimaryKeySelective(PlanType planType) {
 		return plantypeservice.updateByPrimaryKeySelective(planType);
 		
 	}
 	
-	@RequestMapping(value="/update_by_id")
+	@RequestMapping(value="/update_by_id.do")
 	@ResponseBody
 	private int updateById(PlanType planType) {
 		return plantypeservice.updateByPrimaryKey(planType);
