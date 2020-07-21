@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tech.ssm.mapper.UsingMapper">
-	<resultMap id="UsingMap" type="com.tech.ssm.domain.using">
+	<resultMap id="UsingMap" type="com.tech.ssm.domain.Using">
 		<id column="using_id" jdbcType="VARCHAR" property="using_id" />
 		<result column="using_start" jdbcType="TIMESTAMP" property="using_strat" />
 		<result column="using_end" jdbcType="TIMESTAMP"  property="using_end" />

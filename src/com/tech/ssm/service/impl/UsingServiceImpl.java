@@ -12,48 +12,48 @@ import com.tech.ssm.service.UsingService;
 @Service
 public class UsingServiceImpl implements UsingService {
 	@Autowired
-	UsingMapper usingMapper;
+	UsingMapper usingmapper;
 
 	@Override
 	public Using selectByPrimaryKey(String using_id) {
 
-		return usingMapper.selectByPrimaryKey(using_id);
+		return usingmapper.selectByPrimaryKey(using_id);
 	}
 
 	@Override
 	public int deleteByPrimaryKey(String using_id) {
 
-		return usingMapper.deleteByPrimaryKey(using_id);
+		return usingmapper.deleteByPrimaryKey(using_id);
 	}
 
 	@Override
 	public int insert(Using using) {
 
-		return usingMapper.insert(using);
+		return usingmapper.insert(using);
 	}
 
 	@Override
 	public int insertSelective(Using using) {
 
-		return usingMapper.insertSelective(using);
+		return usingmapper.insertSelective(using);
 	}
 
 	@Override
 	public int updateByPrimaryKeySelective(Using using) {
 
-		return usingMapper.updateByPrimaryKeySelective(using);
+		return usingmapper.updateByPrimaryKeySelective(using);
 	}
 
 	@Override
 	public int updateByPrimaryKey(Using Using) {
 
-		return usingMapper.updateByPrimaryKey(Using);
+		return usingmapper.updateByPrimaryKey(Using);
 	}
 
 	@Override
 	public List<Using> queryAll(Using using) {
 
-		return usingMapper.queryAll(using);
+		return usingmapper.queryAll(using);
 	}
 
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tech.ssm.mapper.SquadMapper">
-	<resultMap id="SquadMap" type="com.tech.ssm.domain.squad">
+	<resultMap id="SquadMap" type="com.tech.ssm.domain.Squad">
 		<id column="squad_id" jdbcType="VARCHAR" property="squad_id" />
 		<result column="squad_teachar" jdbcType="VARCHAR"
 			property="squad_teachar" />

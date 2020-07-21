@@ -6,7 +6,7 @@
 		<id column="student_id" jdbcType="VARCHAR" property="student_id" />
 		<result column="student_name" jdbcType="VARCHAR"
 			property="student_name" />
-		<result column="student_grade" jdbcType="INTEGER"
+		<result column="student_grade" jdbcType="VARCHAR"
 			property="student_grade" />
 		<result column="student_sex" jdbcType="VARCHAR"
 			property="student_sex" />
@@ -20,9 +20,8 @@
 			property="student_class" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		student_id, student_name, student_grade, student_sex,
-		student_professional, student_status,
-		student_admissions,student_class
+		student_id,student_name,student_grade,student_sex,
+		student_professional,student_status,student_admissions,student_class
 	</sql>
 
 	<!-- 根据id查 -->
@@ -48,7 +47,7 @@
 		student_professional, student_status,student_admissions)
 		values
 		(#{student_id,jdbcType=VARCHAR}, #{student_name,jdbcType=VARCHAR},
-		#{student_grade,jdbcType=INTEGER},
+		#{student_grade,jdbcType=VARCHAR},
 		#{student_sex,jdbcType=VARCHAR},#{student_professional,jdbcType=VARCHAR},
 		#{student_status,jdbcType=VARCHAR},#{student_admissions,jdbcType=VARCHAR},#{student_class,jdbcType=VARCHAR})
 	</insert>
@@ -91,7 +90,7 @@
 				#{student_name,jdbcType=VARCHAR},
 			</if>
 			<if test="student_grade != null">
-				#{student_grade,jdbcType=INTEGER},
+				#{student_grade,jdbcType=VARCHAR},
 			</if>
 			<if test="student_sex != null">
 				#{student_sex,jdbcType=VARCHAR},
@@ -119,7 +118,7 @@
 				student_name = #{student_name,jdbcType=VARCHAR},
 			</if>
 			<if test="student_grade != null">
-				student_grade = #{student_grade,jdbcType=INTEGER},
+				student_grade = #{student_grade,jdbcType=VARCHAR},
 			</if>
 			<if test="student_sex != null">
 				student_sex = #{student_sex,jdbcType=VARCHAR},
@@ -148,7 +147,7 @@
 		set student_name =
 		#{student_name,jdbcType=VARCHAR},
 		student_grade =
-		#{student_grade,jdbcType=INTEGER},
+		#{student_grade,jdbcType=VARCHAR},
 		student_sex =
 		#{student_sex,jdbcType=VARCHAR},
 		student_professional =

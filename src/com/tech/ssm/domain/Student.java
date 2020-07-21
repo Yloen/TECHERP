@@ -9,7 +9,7 @@ package com.tech.ssm.domain;
 public class Student {
 	private String student_id;
 	private String student_name;
-	private Integer student_grade;
+	private String student_grade;
 	private String student_sex;
 	private String student_professional;
 	private String student_status;
@@ -32,11 +32,11 @@ public class Student {
 		this.student_name = student_name;
 	}
 
-	public Integer getStudent_grade() {
+	public String getStudent_grade() {
 		return student_grade;
 	}
 
-	public void setStudent_grade(Integer student_grade) {
+	public void setStudent_grade(String student_grade) {
 		this.student_grade = student_grade;
 	}
 

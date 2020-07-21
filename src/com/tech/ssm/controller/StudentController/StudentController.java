@@ -24,6 +24,15 @@ public class StudentController {
 		return studentlist;	
 	}
 	
+	@RequestMapping("/listall.do")
+	@ResponseBody
+	public List<Student> students(){
+		Student student=new Student();
+		student=null;
+		List<Student> studentlist=studnetservice.queryAll(student);
+		return studentlist;	
+	}
+	
 	
 	@RequestMapping("/select_by_id.do")
 	@ResponseBody
