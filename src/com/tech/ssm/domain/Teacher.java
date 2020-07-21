@@ -9,7 +9,7 @@ public class Teacher {
 	private String teacher_id;
 	private String teacher_name;
 	private String teacher_sex;
-	private String teacher_title;
+	private String teacher_position;
 	private String teacher_phone;
 	private String teacher_college;
 
@@ -37,12 +37,12 @@ public class Teacher {
 		this.teacher_sex = teacher_sex;
 	}
 
-	public String getTeacher_title() {
-		return teacher_title;
+	public String getTeacher_position() {
+		return teacher_position;
 	}
 
-	public void setTeacher_title(String teacher_title) {
-		this.teacher_title = teacher_title;
+	public void setTeacher_position(String teacher_position) {
+		this.teacher_position = teacher_position;
 	}
 
 	public String getTeacher_phone() {
@@ -64,7 +64,7 @@ public class Teacher {
 	@Override
 	public String toString() {
 		return "teacher [teacher_id=" + teacher_id + ", teacher_name=" + teacher_name + ", teacher_sex=" + teacher_sex
-				+ ", teacher_title=" + teacher_title + ", teacher_phone=" + teacher_phone + ", teacher_college="
+				+ ", teacher_position=" + teacher_position + ", teacher_phone=" + teacher_phone + ", teacher_college="
 				+ teacher_college + "]";
 	}
 

@@ -7,20 +7,12 @@ package com.tech.ssm.domain;
  */
 public class Course {
 	private String course_id;
-	private String course_pre_id;
 	private String course_teacher;
 	private String course_name;
 	private String course_type;
 	private Integer course_credits;
 	
 
-	public String getCourse_pre_id() {
-		return course_pre_id;
-	}
-
-	public void setCourse_pre_id(String course_pre_id) {
-		this.course_pre_id = course_pre_id;
-	}
 
 	public String getCourse_id() {
 		return course_id;
@@ -64,7 +56,7 @@ public class Course {
 
 	@Override
 	public String toString() {
-		return "Course [course_id=" + course_id + ", course_pre_id=" + course_pre_id + ", course_teacher="
+		return "Course [course_id=" + course_id  + ", course_teacher="
 				+ course_teacher + ", course_name=" + course_name + ", course_type=" + course_type + ", course_credits="
 				+ course_credits + "]";
 	}

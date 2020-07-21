@@ -5,7 +5,7 @@
 		<id column="results_student" jdbcType="VARCHAR" property="results_student" />
 		<id column="results_course" jdbcType="VARCHAR" property="results_course" />
 		<result column="results_credits" jdbcType="INTEGER" property="results_credits" />
-		<result column="result_score" jdbcType="INTEGER" property="result_score" />
+		<result column="result_score" jdbcType="Float" property="result_score" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		results_student, results_course, results_credits, result_score
@@ -33,7 +33,7 @@
 		insert into results (results_student, results_course, results_credits,
 		result_score)
 		values (#{results_student,jdbcType=VARCHAR}, #{results_course,jdbcType=VARCHAR},
-		#{results_credits,jdbcType=INTEGER},#{result_score,jdbcType=INTEGER})
+		#{results_credits,jdbcType=INTEGER},#{result_score,jdbcType=Float})
 	</insert>
 	
 	
@@ -65,7 +65,7 @@
 				#{results_credits,jdbcType=INTEGER},
 			</if>
 			<if test="result_score != null">
-				#{result_score,jdbcType=INTEGER},
+				#{result_score,jdbcType=Float},
 			</if>
 		</trim>
 	</insert>
@@ -78,7 +78,7 @@
 				results_credits = #{results_credits,jdbcType=INTEGER},
 			</if>
 			<if test="result_score != null">
-				result_score = #{result_score,jdbcType=INTEGER},
+				result_score = #{result_score,jdbcType=Float},
 			</if>
 			
 		</set>
@@ -92,7 +92,7 @@
 		parameterType="com.tech.ssm.domain.Results">
 		update results
 		set results_credits = #{results_credits,jdbcType=INTEGER},
-		result_score = #{result_score,jdbcType=INTEGER}
+		result_score = #{result_score,jdbcType=Float}
 		where results_student = #{results_student,jdbcType=VARCHAR}
 		AND results_course = #{results_course,jdbcType=VARCHAR}
 	</update>

@@ -5,9 +5,11 @@
 		<id column="company_id" jdbcType="VARCHAR" property="company_id" />
 		<id column="company_jobs" jdbcType="VARCHAR" property="company_jobs" />
 		<result column="company_name" jdbcType="VARCHAR" property="company_name" />
+		<result column="company_address" jdbcType="VARCHAR" property="company_address" />
+		<result column="company_phone" jdbcType="VARCHAR" property="company_phone" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		company_id,company_jobs, company_name
+		company_id,company_jobs, company_name,company_address,company_phone
 	</sql>
 	
 	<!-- 根据id查 -->
@@ -29,9 +31,9 @@
 	
 	<!-- 增加 -->
 	<insert id="insert" parameterType="com.tech.ssm.domain.Company">
-		insert into company (company_id,company_jobs, company_name)
+		insert into company (company_id,company_jobs, company_name,company_address,company_phone)
 		values (#{company_id,jdbcType=VARCHAR}, #{company_jobs,jdbcType=VARCHAR},
-		#{company_name,jdbcType=VARCHAR})
+		#{company_name,jdbcType=VARCHAR},#{company_address,jdbcType=VARCHAR},#{company_phone,jdbcType=VARCHAR})
 	</insert>
 	
 	
@@ -48,6 +50,12 @@
 			<if test="company_name != null">
 				company_name,
 			</if>
+			<if test="company_address != null">
+				company_address,
+			</if>
+			<if test="company_phone != null">
+				company_phone,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="company_id != null">
@@ -59,6 +67,12 @@
 			<if test="company_name != null">
 				#{company_name,jdbcType=VARCHAR},
 			</if>
+			<if test="company_address != null">
+				#{company_address,jdbcType=VARCHAR},
+			</if>
+			<if test="company_phone != null">
+				#{company_phone,jdbcType=VARCHAR},
+			</if>
 		</trim>
 	</insert>
 	
@@ -69,6 +83,12 @@
 			<if test="company_name != null">
 				company_name = #{company_name,jdbcType=VARCHAR},
 			</if>
+			<if test="company_address != null">
+				company_address = #{company_address,jdbcType=VARCHAR},
+			</if>
+			<if test="company_phone != null">
+				company_phone = #{company_phone,jdbcType=VARCHAR},
+			</if>
 		</set>
 		where company_id = #{company_id,jdbcType=VARCHAR}
 		AND company_jobs = #{company_jobs,jdbcType=VARCHAR}
@@ -77,7 +97,9 @@
 	<update id="updateByPrimaryKey"
 		parameterType="com.tech.ssm.domain.Company">
 		update company
-		set company_name = #{company_name,jdbcType=VARCHAR}
+		set company_name = #{company_name,jdbcType=VARCHAR},
+		company_address = #{company_address,jdbcType=VARCHAR},
+		company_phone = #{company_phone,jdbcType=VARCHAR}
 		where company_id = #{company_id,jdbcType=VARCHAR}
 		AND company_jobs = #{company_jobs,jdbcType=VARCHAR}
 	</update>
@@ -96,6 +118,12 @@
 			</if>
 			<if test="company_name!=null and company_name!=''">
 				and company_name like concat("%",#{company_name},"%")
+			</if>
+			<if test="company_address!=null and company_address!=''">
+				and company_address like concat("%",#{company_address},"%")
+			</if>
+			<if test="company_phone!=null and company_phone!=''">
+				and company_phone like concat("%",#{company_phone},"%")
 			</if>
 		</where>
 	</select>

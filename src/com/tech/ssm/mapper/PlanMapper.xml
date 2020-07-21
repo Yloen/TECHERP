@@ -3,7 +3,7 @@
 <mapper namespace="com.tech.ssm.mapper.PlanMapper">
 	<resultMap id="PlanMap" type="com.tech.ssm.domain.Plan">
 		<id column="plan_id" jdbcType="VARCHAR" property="plan_id" />
-		<result column="plan_student" jdbcType="VARCHAR" property="plan_student" />
+		<result column="plan_person" jdbcType="VARCHAR" property="plan_person" />
 		<result column="plan_type" jdbcType="VARCHAR" property="plan_type" />
 		<result column="plan_start" jdbcType="TIMESTAMP" property="plan_start" />
 		<result column="plan_name" jdbcType="VARCHAR" property="plan_name" />
@@ -11,7 +11,7 @@
 		<result column="plan_resource" jdbcType="VARCHAR"  property="plan_resource" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		plan_id, plan_student, plan_type, plan_start, plan_name,
+		plan_id, plan_person, plan_type, plan_start, plan_name,
 		plan_end,plan_resource
 	</sql>
 	
@@ -32,9 +32,9 @@
 	
 	<!-- 增加 -->
 	<insert id="insert" parameterType="com.tech.ssm.domain.Plan">
-		insert into plan (plan_id, plan_student, plan_type,
+		insert into plan (plan_id, plan_person, plan_type,
 		plan_start, plan_name,plan_end,plan_resource)
-		values (#{plan_id,jdbcType=VARCHAR}, #{plan_student,jdbcType=VARCHAR},
+		values (#{plan_id,jdbcType=VARCHAR}, #{plan_person,jdbcType=VARCHAR},
 		#{plan_type,jdbcType=VARCHAR},#{plan_start,jdbcType=TIMESTAMP},
 		#{plan_name,jdbcType=VARCHAR},#{plan_end,jdbcType=TIMESTAMP},
 		#{plan_resource,jdbcType=VARCHAR})
@@ -48,8 +48,8 @@
 			<if test="plan_id != null">
 				plan_id,
 			</if>
-			<if test="plan_student != null">
-				plan_student,
+			<if test="plan_person != null">
+				plan_person,
 			</if>
 			<if test="plan_type != null">
 				plan_type,
@@ -71,8 +71,8 @@
 			<if test="plan_id != null">
 				#{plan_id,jdbcType=VARCHAR},
 			</if>
-			<if test="plan_student != null">
-				#{plan_student,jdbcType=VARCHAR},
+			<if test="plan_person != null">
+				#{plan_person,jdbcType=VARCHAR},
 			</if>
 			<if test="plan_type != null">
 				#{plan_type,jdbcType=VARCHAR},
@@ -96,8 +96,8 @@
 		parameterType="com.tech.ssm.domain.Plan">
 		update plan
 		<set>
-			<if test="plan_student != null">
-				plan_student = #{plan_student,jdbcType=VARCHAR},
+			<if test="plan_person != null">
+				plan_person = #{plan_person,jdbcType=VARCHAR},
 			</if>
 			<if test="plan_type != null">
 				plan_type = #{plan_type,jdbcType=VARCHAR},
@@ -121,7 +121,7 @@
 	<update id="updateByPrimaryKey"
 		parameterType="com.tech.ssm.domain.Plan">
 		update plan
-		set plan_student = #{plan_student,jdbcType=VARCHAR},
+		set plan_person = #{plan_person,jdbcType=VARCHAR},
 		plan_type = #{plan_type,jdbcType=VARCHAR},
 		plan_start = #{plan_start,jdbcType=TIMESTAMP},
 		plan_name = #{plan_name,jdbcType=VARCHAR},
@@ -139,8 +139,8 @@
 			<if test="plan_id!=null and plan_id!=''">
 				and plan_id like concat("%",#{plan_id},"%")
 			</if>
-			<if test="plan_student!=null and plan_student!=''">
-				and plan_student like concat("%",#{plan_student},"%")
+			<if test="plan_person!=null and plan_person!=''">
+				and plan_person like concat("%",#{plan_person},"%")
 			</if>
 			<if test="plan_type!=null and plan_type!=''">
 				and plan_type like concat("%",#{plan_type},"%")

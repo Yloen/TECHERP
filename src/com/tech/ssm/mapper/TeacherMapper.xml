@@ -5,14 +5,14 @@
 		<id column="teacher_id" jdbcType="VARCHAR" property="teacher_id" />
 		<result column="teacher_name" jdbcType="VARCHAR" property="teacher_name" />
 		<result column="teacher_sex" jdbcType="VARCHAR" property="teacher_sex" />
-		<result column="teacher_title" jdbcType="VARCHAR" property="teacher_title" />
+		<result column="teacher_position" jdbcType="VARCHAR" property="teacher_position" />
 		<result column="teacher_phone" jdbcType="VARCHAR"
 			property="teacher_phone" />
 		<result column="teacher_college" jdbcType="VARCHAR" 
 			property="teacher_college" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		teacher_id, teacher_name, teacher_sex, teacher_title, teacher_phone,
+		teacher_id, teacher_name, teacher_sex, teacher_position, teacher_phone,
 		teacher_college
 	</sql>
 	
@@ -34,9 +34,9 @@
 	<!-- 增加 -->
 	<insert id="insert" parameterType="com.tech.ssm.domain.Teacher">
 		insert into teacher (teacher_id, teacher_name, teacher_sex,
-		teacher_title, teacher_phone,teacher_college)
+		teacher_position, teacher_phone,teacher_college)
 		values (#{teacher_id,jdbcType=VARCHAR}, #{teacher_name,jdbcType=VARCHAR},
-		#{teacher_sex,jdbcType=VARCHAR},#{teacher_title,jdbcType=VARCHAR},
+		#{teacher_sex,jdbcType=VARCHAR},#{teacher_position,jdbcType=VARCHAR},
 		#{teacher_phone,jdbcType=VARCHAR},#{teacher_college,jdbcType=VARCHAR})
 	</insert>
 	
@@ -54,8 +54,8 @@
 			<if test="teacher_sex != null">
 				teacher_sex,
 			</if>
-			<if test="teacher_title != null">
-				teacher_title,
+			<if test="teacher_position != null">
+				teacher_position,
 			</if>
 			<if test="teacher_phone != null">
 				teacher_phone,
@@ -74,8 +74,8 @@
 			<if test="teacher_sex != null">
 				#{teacher_sex,jdbcType=VARCHAR},
 			</if>
-			<if test="teacher_title != null">
-				#{teacher_title,jdbcType=VARCHAR},
+			<if test="teacher_position != null">
+				#{teacher_position,jdbcType=VARCHAR},
 			</if>
 			<if test="teacher_phone != null">
 				#{teacher_phone,jdbcType=VARCHAR},
@@ -96,8 +96,8 @@
 			<if test="teacher_sex != null">
 				teacher_sex = #{teacher_sex,jdbcType=VARCHAR},
 			</if>
-			<if test="teacher_title != null">
-				teacher_title = #{teacher_title,jdbcType=VARCHAR},
+			<if test="teacher_position != null">
+				teacher_position = #{teacher_position,jdbcType=VARCHAR},
 			</if>
 			<if test="teacher_phone != null">
 				teacher_phone = #{teacher_phone,jdbcType=VARCHAR},
@@ -114,7 +114,7 @@
 		update teacher
 		set teacher_name = #{teacher_name,jdbcType=VARCHAR},
 		teacher_sex = #{teacher_sex,jdbcType=VARCHAR},
-		teacher_title = #{teacher_title,jdbcType=VARCHAR},
+		teacher_position = #{teacher_position,jdbcType=VARCHAR},
 		teacher_phone = #{teacher_phone,jdbcType=VARCHAR},
 		teacher_college = #{teacher_college,jdbcType=VARCHAR}
 		where teacher_id = #{teacher_id,jdbcType=VARCHAR}
@@ -135,8 +135,8 @@
 			<if test="teacher_sex!=null and teacher_sex!=''">
 				and teacher_sex like concat("%",#{teacher_sex},"%")
 			</if>
-			<if test="teacher_title!=null and teacher_title!=''">
-				and teacher_title like concat("%",#{teacher_title},"%")
+			<if test="teacher_position!=null and teacher_position!=''">
+				and teacher_position like concat("%",#{teacher_position},"%")
 			</if>
 			<if test="teacher_phone!=null and teacher_phone!=''">
 				and teacher_phone like concat("%",#{teacher_phone},"%")

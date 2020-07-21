@@ -8,9 +8,28 @@ package com.tech.ssm.domain;
 public class Company {
 
 	private String company_id;
-	
 	private String company_jobs;
+	private String company_address;
+	
+	private String company_phone;
 	private String company_name;
+
+	
+	public String getCompany_address() {
+		return company_address;
+	}
+
+	public void setCompany_address(String company_address) {
+		this.company_address = company_address;
+	}
+
+	public String getCompany_phone() {
+		return company_phone;
+	}
+
+	public void setCompany_phone(String company_phone) {
+		this.company_phone = company_phone;
+	}
 
 	public String getCompany_id() {
 		return company_id;
@@ -38,8 +57,8 @@ public class Company {
 
 	@Override
 	public String toString() {
-		return "Company [company_id=" + company_id + ", company_jobs=" + company_jobs + ", company_name=" + company_name
-				+ "]";
+		return "Company [company_id=" + company_id + ", company_jobs=" + company_jobs + ", company_address="
+				+ company_address + ", company_phone=" + company_phone + ", company_name=" + company_name + "]";
 	}
 
 	

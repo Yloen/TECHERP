@@ -4,14 +4,13 @@
 	<resultMap id="BaseResultMap" type="com.tech.ssm.domain.Course">
 		<id column="course_id" jdbcType="VARCHAR" property="course_id" />
 		<id column="course_teacher" jdbcType="VARCHAR" property="course_teacher" />
-		<result column="course_pre_id" jdbcType="VARCHAR" property="course_pre_id" />
 		<result column="course_name" jdbcType="VARCHAR" property="course_name" />
 		<result column="course_type" jdbcType="VARCHAR" property="course_type" />
 		<result column="course_credits" jdbcType="INTEGER"
 			property="course_credits" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		course_id,course_pre_id, course_teacher, course_name, course_type, course_credits
+		course_id, course_teacher, course_name, course_type, course_credits
 	</sql>
 	
 	<!-- 根据id查 -->
@@ -33,9 +32,9 @@
 	
 	<!-- 增加 -->
 	<insert id="insert" parameterType="com.tech.ssm.domain.Course">
-		insert into course (course_id,course_pre_id, course_teacher,
+		insert into course (course_id, course_teacher,
 		 course_name, course_type, course_credits)
-		values (#{course_id,jdbcType=VARCHAR}, #{course_pre_id,jdbcType=VARCHAR},
+		values (#{course_id,jdbcType=VARCHAR},
 		#{course_teacher,jdbcType=VARCHAR},#{course_name,jdbcType=VARCHAR},
 		#{course_type,jdbcType=VARCHAR},#{course_credits,jdbcType=INTEGER})
 	</insert>
@@ -47,9 +46,6 @@
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="course_id != null">
 				course_id,
-			</if>
-			<if test="course_pre_id != null">
-				course_pre_id,
 			</if>
 			<if test="course_teacher != null">
 				course_teacher,
@@ -68,9 +64,6 @@
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="course_id != null">
 				#{course_id,jdbcType=VARCHAR},
-			</if>
-			<if test="course_pre_id != null">
-				#{course_pre_id,jdbcType=VARCHAR},
 			</if>
 			<if test="course_teacher != null">
 				#{course_teacher,jdbcType=VARCHAR},
@@ -91,9 +84,6 @@
 		parameterType="com.tech.ssm.domain.Course">
 		update course
 		<set>
-			<if test="course_pre_id != null">
-				course_pre_id = #{course_pre_id,jdbcType=VARCHAR},
-			</if>
 			<if test="course_name != null">
 				course_name = #{course_name,jdbcType=VARCHAR},
 			</if>
@@ -111,7 +101,7 @@
 	<update id="updateByPrimaryKey"
 		parameterType="com.tech.ssm.domain.Course">
 		update course
-		set course_pre_id=#{course_pre_id,jdbcType=VARCHAR},
+		set 
 		course_name = #{course_name,jdbcType=VARCHAR},
 		course_type = #{course_type,jdbcType=VARCHAR},
 		course_credits = #{course_credits,jdbcType=INTEGER}
@@ -127,9 +117,6 @@
 		<where>
 			<if test="course_id!=null and course_id!=''">
 				and course_id like concat("%",#{course_id},"%")
-			</if>
-			<if test="course_pre_id!=null and course_pre_id!=''">
-				and course_pre_id like concat("%",#{course_pre_id},"%")
 			</if>
 			<if test="course_teacher!=null and course_teacher!=''">
 				and course_teacher like concat("%",#{course_teacher},"%")

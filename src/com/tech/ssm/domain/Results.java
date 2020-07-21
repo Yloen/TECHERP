@@ -9,7 +9,7 @@ public class Results {
 	private String results_student;
 	private String results_course;
 	private Integer results_credits;
-	private Integer result_score;
+	private Float result_score;
 
 	public String getResults_student() {
 		return results_student;
@@ -35,11 +35,11 @@ public class Results {
 		this.results_credits = results_credits;
 	}
 
-	public Integer getResult_score() {
+	public Float getResult_score() {
 		return result_score;
 	}
 
-	public void setResult_score(Integer result_score) {
+	public void setResult_score(Float result_score) {
 		this.result_score = result_score;
 	}
 

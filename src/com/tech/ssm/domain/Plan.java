@@ -13,11 +13,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Plan {
 
 	private String plan_id;
-	private String plan_student;
+	private String plan_person;
 	private String plan_type;
+	private String plan_name;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date plan_start;
-	private String plan_name;
+	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date plan_end;
 	private String plan_resource;
@@ -47,11 +48,11 @@ public class Plan {
 	}
 
 	public String getPlan_student() {
-		return plan_student;
+		return plan_person;
 	}
 
-	public void setPlan_student(String plan_student) {
-		this.plan_student = plan_student;
+	public void setPlan_student(String plan_person) {
+		this.plan_person = plan_person;
 	}
 
 	public String getPlan_type() {
@@ -88,7 +89,7 @@ public class Plan {
 
 	@Override
 	public String toString() {
-		return "Plan [plan_id=" + plan_id + ", plan_student=" + plan_student + ", plan_type=" + plan_type
+		return "Plan [plan_id=" + plan_id + ", plan_person=" + plan_person + ", plan_type=" + plan_type
 				+ ", plan_start=" + plan_start + ", plan_name=" + plan_name + ", plan_end=" + plan_end
 				+ ", plan_resource=" + plan_resource + "]";
 	}
