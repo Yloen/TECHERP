@@ -11,7 +11,7 @@ public class Teacher {
 	private String teacher_sex;
 	private String teacher_position;
 	private String teacher_phone;
-	private String teacher_college;
+	private String teacher_department;
 
 	public String getTeacher_id() {
 		return teacher_id;
@@ -54,18 +54,18 @@ public class Teacher {
 	}
 
 	public String getTeacher_college() {
-		return teacher_college;
+		return teacher_department;
 	}
 
-	public void setTeacher_college(String teacher_college) {
-		this.teacher_college = teacher_college;
+	public void setTeacher_college(String teacher_department) {
+		this.teacher_department = teacher_department;
 	}
 
 	@Override
 	public String toString() {
 		return "teacher [teacher_id=" + teacher_id + ", teacher_name=" + teacher_name + ", teacher_sex=" + teacher_sex
-				+ ", teacher_position=" + teacher_position + ", teacher_phone=" + teacher_phone + ", teacher_college="
-				+ teacher_college + "]";
+				+ ", teacher_position=" + teacher_position + ", teacher_phone=" + teacher_phone + ", teacher_department="
+				+ teacher_department + "]";
 	}
 
 }

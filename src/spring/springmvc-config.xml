@@ -23,10 +23,10 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	<mvc:resources mapping="/images/**" location="/images/" />
-	<mvc:resources mapping="/css/**" location="/css/" />
-	<mvc:resources mapping="/fonts/**" location="/fonts/" />
-	<mvc:resources mapping="/js/**" location="/js/" />
+	<mvc:resources mapping="/lib/**" location="/lib/" />
+	<mvc:resources mapping="/static/**" location="/static/" />
+	<mvc:resources mapping="/temp/**" location="/temp/" />
+	
 
 
 	<!-- 配置文件上传解析器 MultipartResolver -->

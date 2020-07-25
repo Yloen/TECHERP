@@ -14,7 +14,7 @@ public class Student {
 	private String student_professional;
 	private String student_status;
 	private String student_admissions;
-	private String student_class;
+	private String student_squad;
 
 	public String getStudent_id() {
 		return student_id;
@@ -73,11 +73,11 @@ public class Student {
 	}
 
 	public String getStudent_class() {
-		return student_class;
+		return student_squad;
 	}
 
-	public void setStudent_class(String student_class) {
-		this.student_class = student_class;
+	public void setStudent_class(String student_squad) {
+		this.student_squad = student_squad;
 	}
 
 	@Override
@@ -85,7 +85,7 @@ public class Student {
 		return "Student [student_id=" + student_id + ", student_name=" + student_name + ", student_grade="
 				+ student_grade + ", student_sex=" + student_sex + ", student_professional=" + student_professional
 				+ ", student_status=" + student_status + ", student_admissions=" + student_admissions
-				+ ", student_class=" + student_class + "]";
+				+ ", student_squad=" + student_squad + "]";
 	}
 
 }

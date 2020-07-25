@@ -4680,7 +4680,7 @@ function displaynavbar(obj){
 	$.fn.Huitextarealength = function(options){
 		var defaults = {
 			minlength:0,
-			maxlength:140,
+			maxlength:300,
 			errorClass:"error",
 			exceed:true,			
 		}
