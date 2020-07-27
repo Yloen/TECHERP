@@ -53,11 +53,11 @@ public class Teacher {
 		this.teacher_phone = teacher_phone;
 	}
 
-	public String getTeacher_college() {
+	public String getTeacher_department() {
 		return teacher_department;
 	}
 
-	public void setTeacher_college(String teacher_department) {
+	public void setTeacher_department(String teacher_department) {
 		this.teacher_department = teacher_department;
 	}
 

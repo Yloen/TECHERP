@@ -2,6 +2,8 @@ package com.tech.ssm.controller.Data;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,13 @@ public class TeacherController {
 		return Teacherlist;	
 	}
 	
+	@RequestMapping("/listall.do")
+	public String Teacher(Teacher teacher,HttpSession session){
+		teacher=null;
+		List<Teacher> teacherlist=teacherservice.queryAll(teacher);
+		session.setAttribute("teacherlist", teacherlist);
+		return "teacher_list";	
+	}
 	
 	@RequestMapping("/select_by_id.do")
 	@ResponseBody

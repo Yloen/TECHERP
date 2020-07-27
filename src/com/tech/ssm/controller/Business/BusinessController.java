@@ -32,7 +32,7 @@ public class BusinessController {
 	
 	@RequestMapping(value="/teacher.do")
 	public String Teacher(){
-		return "teacher_list";
+		return "redirect:/Teacher/listall.do";
 	}
 
 }

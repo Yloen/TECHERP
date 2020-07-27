@@ -1,4 +1,11 @@
-﻿<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.tech.ssm.domain.Teacher" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
   <meta charset="utf-8">
   <meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -10,11 +17,11 @@
   <script type="text/javascript" src="lib/html5shiv.js"></script>
   <script type="text/javascript" src="lib/respond.min.js"></script>
   <![endif]-->
-  <link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css"/>
-  <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css"/>
-  <link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css"/>
-  <link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin"/>
-  <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css"/>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/h-ui/css/H-ui.min.css"/>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/h-ui.admin/css/H-ui.admin.css"/>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/h-ui.admin/skin/default/skin.css" id="skin"/>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/h-ui.admin/css/style.css"/>
   <!--[if IE 6]>
   <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js"></script>
   <script>DD_belatedPNG.fix('*');</script>
@@ -58,13 +65,36 @@
         <th width="50">性别</th>
 		<th width="80">职位</th>
         <th width="90">手机号</th>
-        <th width="130">邮箱</th>
         <th width="">学院</th>
-        <th width="70">状态</th>
         <th width="100">操作</th>
       </tr>
       </thead>
       <tbody>
+      
+      <c:forEach items="${sessionScope.teacherlist}" var="tea">
+       <tr class="text-c">
+        <td><input type="checkbox" value="1" name=""></td>
+        <td>${tea.getTeacher_id()}</td>
+        <td><u style="cursor:pointer" class="text-primary"
+               onclick="member_show('张三','teacher-show.html','10001','360','400')">${tea.getTeacher_name()}</u></td>
+        <td>${tea.getTeacher_sex()}</td>
+        <td>${tea.getTeacher_position()}</td>
+        <td>${tea.getTeacher_phone()}</td>
+        <td class="text-l">${tea.getTeacher_department()}</td>
+        <td class="td-manage">
+					<a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>
+					<a title="编辑" href="javascript:;" onclick="member_edit('编辑','teacher-edit.html','4','','510')" class="ml-5" style="text-decoration:none">
+						<i class="Hui-iconfont">&#xe6df;</i>
+					</a>
+					<a style="text-decoration:none" class="ml-5" onClick="change_password('修改密码','change-password.html','10001','600','270')"
+						 href="javascript:;" title="修改密码"><i class="Hui-iconfont">&#xe63f;</i>
+					</a>
+          <a title="删除" href="javascript:;" onclick="member_del(this,'1')" class="ml-5" style="text-decoration:none">
+						<i class="Hui-iconfont">&#xe6e2;</i>
+					</a>
+				</td>
+      </tr>
+      </c:forEach>
       <tr class="text-c">
         <td><input type="checkbox" value="1" name=""></td>
         <td>1</td>
@@ -73,7 +103,7 @@
         <td>男</td>
         <td>授课</td>
         <td>19981497415</td>
-        <td>2324074040@qq.com</td>
+        
         <td class="text-l">四川交通职业技术学院信息系</td>
         <td class="td-status"><span class="label label-success radius">已启用</span></td>
         <td class="td-manage">
