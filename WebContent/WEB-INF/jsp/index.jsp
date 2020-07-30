@@ -29,7 +29,7 @@
 <body>
 <header class="navbar-wrapper">
     <div class="navbar navbar-fixed-top">
-        <div class="container-fluid cl"><a class="logo navbar-logo f-l mr-10 hidden-xs" href="index.html">TEACHERP</a>
+        <div class="container-fluid cl"><a class="logo navbar-logo f-l mr-10 hidden-xs" href="${pageContext.request.contextPath}/index">TEACHERP</a>
             <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
             <nav class="nav navbar-nav">
                 <ul class="cl">
@@ -91,7 +91,7 @@
             <dt><i class="Hui-iconfont">&#xe616;</i> 公告管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a data-href="article-list.html" data-title="公告管理" href="javascript:void(0)">公告管理</a></li>
+                    <li><a data-href="${pageContext.request.contextPath}/article_list.do" data-title="公告管理" href="javascript:void(0)">公告管理</a></li>
                 </ul>
             </dd>
         </dl>
@@ -145,8 +145,8 @@
             <dt><i class="Hui-iconfont">&#xe616;</i> 学院管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a data-href="college-list.html" data-title="学院列表" href="javascript:void(0)">学院列表</a></li>
-                    <li><a data-href="college-list.html" data-title="学院分类" href="javascript:void(0)">学院分类</a></li>
+                    <li><a data-href="${pageContext.request.contextPath}/college_list.do" data-title="学院列表" href="javascript:void(0)">学院列表</a></li>
+                    <li><a data-href="${pageContext.request.contextPath}/college_list.do" data-title="学院分类" href="javascript:void(0)">学院分类</a></li>
                 </ul>
             </dd>
         </dl>

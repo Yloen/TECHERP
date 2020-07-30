@@ -1,4 +1,6 @@
-﻿<!DOCTYPE HTML>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
   <meta charset="utf-8">
@@ -97,7 +99,7 @@
           <a style="text-decoration:none" onClick="article_stop(this,'10001')" href="javascript:;" title="下架">
             <i class="Hui-iconfont">&#xe6de;</i>
           </a>
-          <a style="text-decoration:none" class="ml-5" onClick="article_edit('公告编辑','../article-add.html','10001')"
+          <a style="text-decoration:none" class="ml-5" onClick="article_edit('公告编辑','${pageContext.request.contextPath}/article_add.do','10001')"
              href="javascript:;" title="编辑">
             <i class="Hui-iconfont">&#xe6df;</i>
           </a>

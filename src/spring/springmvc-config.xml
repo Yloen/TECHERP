@@ -35,5 +35,4 @@
 		<!-- 设置请求编码格式 -->
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
-
 </beans>
