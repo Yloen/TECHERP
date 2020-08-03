@@ -40,9 +40,10 @@ public class BusinessController {
 		return "teacher_add";
 	}
 	
-	
-	
-	
+	@RequestMapping(value="/teacher_show.do")
+	public String Teacher_show(String teacher_id){
+		return "redirect:/Teacher/select_by_id.do"+"?teacher_id="+teacher_id;
+	}
 	
 	
 	@RequestMapping(value="/article_list.do")

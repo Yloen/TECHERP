@@ -76,17 +76,17 @@
         <td><input type="checkbox" value="1" name=""></td>
         <td>${tea.getTeacher_id()}</td>
         <td><u style="cursor:pointer" class="text-primary"
-               onclick="member_show('张三','teacher-show.html','10001','360','400')">${tea.getTeacher_name()}</u></td>
+               onclick="member_show('${tea.getTeacher_name()}','${pageContext.request.contextPath}/teacher_show.do?teacher_id=${tea.getTeacher_id()}','10001','360','400')">${tea.getTeacher_name()}</u></td>
         <td>${tea.getTeacher_sex()}</td>
         <td>${tea.getTeacher_position()}</td>
         <td>${tea.getTeacher_phone()}</td>
         <td class="text-l">${tea.getTeacher_department()}</td>
         <td class="td-manage">
 					<a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>
-					<a title="编辑" href="javascript:;" onclick="member_edit('编辑','teacher-edit.html','4','','510')" class="ml-5" style="text-decoration:none">
+					<a title="编辑" href="javascript:;" onclick="member_edit('编辑','${pageContext.request.contextPath}/teacher_edit.do','4','','510')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>
 					</a>
-					<a style="text-decoration:none" class="ml-5" onClick="change_password('修改密码','change-password.html','10001','600','270')"
+					<a style="text-decoration:none" class="ml-5" onClick="change_password('修改密码','${pageContext.request.contextPath}/change_password.do','10001','600','270')"
 						 href="javascript:;" title="修改密码"><i class="Hui-iconfont">&#xe63f;</i>
 					</a>
           <a title="删除" href="javascript:;" onclick="member_del(this,'1')" class="ml-5" style="text-decoration:none">

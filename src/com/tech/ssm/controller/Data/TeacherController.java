@@ -36,10 +36,10 @@ public class TeacherController {
 	}
 	
 	@RequestMapping("/select_by_id.do")
-	@ResponseBody
-	public Teacher selectByPrimaryKey(String teacher_id){
+	public String selectByPrimaryKey(String teacher_id,HttpSession session){
 		Teacher Teacher=teacherservice.selectByPrimaryKey(teacher_id);
-		return Teacher;	
+		session.setAttribute("teacher", Teacher);
+		return "teacher_show";	
 	}
 	
 	
