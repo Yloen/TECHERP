@@ -35,11 +35,26 @@ public class BusinessController {
 		return "redirect:/Teacher/listall.do";
 	}
 	
+	@RequestMapping(value="/teacher_add.do")
+	public String Teacher_add(){
+		return "teacher_add";
+	}
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value="/article_list.do")
 	public String Article(){
 		return "article_list";
 	}
+	
+	@RequestMapping(value="/article_add.do")
+	public String Article_Add(){
+		return "article_add";
+	}
+	
 	
 	@RequestMapping(value="/college_list.do")
 	public String College(){
@@ -52,8 +67,5 @@ public class BusinessController {
 	}
 
 	
-	@RequestMapping(value="/article_add.do")
-	public String Article_Add(){
-		return "article_add";
-	}
+	
 }

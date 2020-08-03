@@ -60,7 +60,7 @@
 			<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
 				<i class="Hui-iconfont">&#xe6e2;</i> 批量删除
 			</a>
-			<a class="btn btn-primary radius" data-title="添加资讯" data-href="article-add.html"
+			<a class="btn btn-primary radius" data-title="添加资讯" data-href="${pageContext.request.contextPath}/article_add.do"
          onclick="Hui_admin_tab(this)" href="javascript:;">
 				<i class="Hui-iconfont">&#xe600;</i> 发布公告
 			</a>

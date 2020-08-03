@@ -29,14 +29,14 @@
 <body>
 <header class="navbar-wrapper">
     <div class="navbar navbar-fixed-top">
-        <div class="container-fluid cl"><a class="logo navbar-logo f-l mr-10 hidden-xs" href="${pageContext.request.contextPath}/index">TEACHERP</a>
+        <div class="container-fluid cl"><a class="logo navbar-logo f-l mr-10 hidden-xs" href="${pageContext.request.contextPath}/index.do">TEACHERP</a>
             <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
             <nav class="nav navbar-nav">
                 <ul class="cl">
                     <li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i
                             class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
                         <ul class="dropDown-menu menu radius box-shadow">
-                            <li><a href="javascript:;" onclick="article_add('添加公告','article-add.html')"><i
+                            <li><a href="javascript:;" onclick="article_add('添加公告','${pageContext.request.contextPath}/article_add.do')"><i
                                     class="Hui-iconfont">&#xe616;</i> 公告</a></li>
                             <li><a href="javascript:;" onclick="picture_add('添加学院','picture-add.html')"><i
                                     class="Hui-iconfont">&#xe613;</i> 学院</a></li>
