@@ -86,10 +86,10 @@
 					<a title="编辑" href="javascript:;" onclick="member_edit('编辑','${pageContext.request.contextPath}/teacher_edit.do','4','','510')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>
 					</a>
-					<a style="text-decoration:none" class="ml-5" onClick="change_password('修改密码','${pageContext.request.contextPath}/change_password.do','10001','600','270')"
+					<a style="text-decoration:none" class="ml-5" onClick="change_password('修改密码','${pageContext.request.contextPath}/change_password.do?name=${tea.getTeacher_name()}','10001','600','270')"
 						 href="javascript:;" title="修改密码"><i class="Hui-iconfont">&#xe63f;</i>
 					</a>
-          <a title="删除" href="javascript:;" onclick="member_del(this,'1')" class="ml-5" style="text-decoration:none">
+          <a title="删除" href="javascript:;" onclick="member_del(this,'${tea.getTeacher_id()}')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6e2;</i>
 					</a>
 				</td>
@@ -211,7 +211,7 @@
     layer.confirm('确认要删除吗？', function (index) {
       $.ajax({
         type: 'POST',
-        url: '',
+        url: '${pageContext.request.contextPath}/Teacher/delete_id.do?teacher_id='+id,
         dataType: 'json',
         success: function (data) {
           $(obj).parents("tr").remove();

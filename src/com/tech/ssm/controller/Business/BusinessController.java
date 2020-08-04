@@ -1,5 +1,7 @@
 package com.tech.ssm.controller.Business;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +46,10 @@ public class BusinessController {
 	public String Teacher_show(String teacher_id){
 		return "redirect:/Teacher/select_by_id.do"+"?teacher_id="+teacher_id;
 	}
-	
+	@RequestMapping(value="/teacher_edit.do")
+	public String Teacher_edit(){
+		return "teacher_edit";
+	}
 	
 	@RequestMapping(value="/article_list.do")
 	public String Article(){
@@ -63,7 +68,8 @@ public class BusinessController {
 	}
 	
 	@RequestMapping(value="/change_password.do")
-	public String Change_Password(){
+	public String Change_Password(String name,HttpSession session){
+		session.setAttribute("name", name);
 		return "change_password";
 	}
 
