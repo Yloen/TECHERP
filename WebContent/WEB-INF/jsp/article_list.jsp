@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,11 +15,11 @@
   <script type="text/javascript" src="lib/html5shiv.js"></script>
   <script type="text/javascript" src="lib/respond.min.js"></script>
   <![endif]-->
-  <link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css"/>
-  <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css"/>
-  <link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css"/>
-  <link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin"/>
-  <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css"/>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/h-ui/css/H-ui.min.css"/>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/h-ui.admin/css/H-ui.admin.css"/>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/h-ui.admin/skin/default/skin.css" id="skin"/>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/h-ui.admin/css/style.css"/>
   <!--[if IE 6]>
   <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js"></script>
   <script>DD_belatedPNG.fix('*');</script>
@@ -87,7 +89,7 @@
         <td><input type="checkbox" value="" name=""></td>
         <td>10001</td>
         <td class="text-l">
-          <u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','article-zhang.html','10001')"
+          <u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','${pageContext.request.contextPath}/article_show.do','10001')"
              title="查看">公告标题1</u>
         </td>
         <td>分类一</td>
@@ -99,7 +101,7 @@
           <a style="text-decoration:none" onClick="article_stop(this,'10001')" href="javascript:;" title="下架">
             <i class="Hui-iconfont">&#xe6de;</i>
           </a>
-          <a style="text-decoration:none" class="ml-5" onClick="article_edit('公告编辑','${pageContext.request.contextPath}/article_add.do','10001')"
+          <a style="text-decoration:none" class="ml-5" onClick="article_edit('公告编辑','${pageContext.request.contextPath}/article_edit.do','10001')"
              href="javascript:;" title="编辑">
             <i class="Hui-iconfont">&#xe6df;</i>
           </a>
@@ -113,7 +115,7 @@
         <td><input type="checkbox" value="" name=""></td>
         <td>10002</td>
         <td class="text-l">
-          <u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','article-zhang.html','10002')"
+          <u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','${pageContext.request.contextPath}/article_show.do','10002')"
              title="查看">公告标题2</u>
         </td>
         <td>分类二</td>
@@ -123,7 +125,7 @@
         <td class="td-status"><span class="label label-success radius">草稿</span></td>
         <td class="f-14 td-manage">
           <a style="text-decoration:none" onClick="article_shenhe(this,'10001')" href="javascript:;" title="审核">审核</a>
-          <a style="text-decoration:none" class="ml-5" onClick="article_edit('公告编辑','article-add.html','10001')"
+          <a style="text-decoration:none" class="ml-5" onClick="article_edit('公告编辑','${pageContext.request.contextPath}/article_edit.do','10001')"
              href="javascript:;" title="编辑">
             <i class="Hui-iconfont">&#xe6df;</i>
           </a>
@@ -138,15 +140,15 @@
   </div>
 </div>
 <!--_footer 作为公共模版分离出去-->
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
-<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
 
 <!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
-<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
   $('.table-sort').dataTable({
     "aaSorting": [[1, "desc"]],       //默认第几个排序

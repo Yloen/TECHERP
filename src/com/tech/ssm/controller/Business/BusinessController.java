@@ -51,16 +51,43 @@ public class BusinessController {
 		return "teacher_edit";
 	}
 	
+	
+	
 	@RequestMapping(value="/article_list.do")
 	public String Article(){
 		return "article_list";
+	}
+	@RequestMapping(value="/article_show.do")
+	public String Article_show(){
+		return "article_show";
 	}
 	
 	@RequestMapping(value="/article_add.do")
 	public String Article_Add(){
 		return "article_add";
 	}
+	@RequestMapping(value="/article_edit.do")
+	public String Article_edit(){
+		return "article_edit";
+	}
 	
+	
+	
+	@RequestMapping(value="/student_list.do")
+	public String student_list(){
+		return "student_list";
+	}
+	
+	@RequestMapping(value="/student_show.do")
+	public String student_show(){
+		return "student_show";
+	}
+	
+	
+	@RequestMapping(value="/admin_list.do")
+	public String admin_list(){
+		return "admin_list";
+	}
 	
 	@RequestMapping(value="/college_list.do")
 	public String College(){
