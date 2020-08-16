@@ -32,26 +32,26 @@
 </head>
 <body>
 <article class="page-container">
-  <form action="" method="post" class="form form-horizontal" id="form-member-add">
+  <form  method="post" class="form form-horizontal" id="form-member-add">
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+        <input type="text" class="input-text" value="" placeholder="" id="username" name="teacher_name">
       </div>
     </div>
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>性别：</label>
       <div class="formControls col-xs-8 col-sm-9 skin-minimal">
         <div class="radio-box">
-          <input name="sex" type="radio" id="sex-1" checked>
+          <input name="teacher_sex" type="radio" id="sex-1" checked>
           <label for="sex-1">男</label>
         </div>
         <div class="radio-box">
-          <input type="radio" id="sex-2" name="sex">
+          <input type="radio" id="sex-2" name="teacher_sex">
           <label for="sex-2">女</label>
         </div>
         <div class="radio-box">
-          <input type="radio" id="sex-3" name="sex">
+          <input type="radio" id="sex-3" name="teacher_sex">
           <label for="sex-3">保密</label>
         </div>
       </div>
@@ -59,7 +59,7 @@
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="" placeholder="" id="mobile" name="mobile">
+        <input type="text" class="input-text" value="" placeholder="" id="mobile" name="teacher_phone">
       </div>
     </div>
     <div class="row cl">
@@ -78,21 +78,21 @@
 				</span></div>
     </div>
     <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-3">所在城市：</label>
+      <label class="form-label col-xs-4 col-sm-3">职务：</label>
       <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
-				<select class="select" size="1" name="city">
-					<option value="" selected>请选择城市</option>
-					<option value="1">北京</option>
-					<option value="2">上海</option>
-					<option value="3">广州</option>
+				<select class="select" size="1" name="teacher_position">
+					<option value="" selected>请选择职务</option>
+					<option value="1">教师</option>
+					<option value="2">教授</option>
+					<option value="3">副教授</option>
 				</select>
 				</span>
 			</div>
     </div>
     <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-3">个人介绍：</label>
+      <label class="form-label col-xs-4 col-sm-3">所属院校：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <textarea name="beizhu" cols="" rows="" class="textarea" placeholder="说点什么...最少输入10个字符"
+        <textarea name="teacher_department" cols="" rows="" class="textarea" placeholder="说点什么...最少输入10个字符"
                   onKeyUp="$.Huitextarealength(this,100)"></textarea>
         <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
       </div>
@@ -106,18 +106,22 @@
 </article>
 
 <!--_footer 作为公共模版分离出去-->
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
-<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
 
 <!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
-<script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script>
-<script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script>
-<script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/jquery.validation/1.14.0/messages_zh.js"></script>
 <script type="text/javascript">
   $(function () {
+	
+	  
+	  
+	  
     $('.skin-minimal input').iCheck({
       checkboxClass: 'icheckbox-blue',
       radioClass: 'iradio-blue',
@@ -151,12 +155,38 @@
       focusCleanup: true,
       success: "valid",
       submitHandler: function (form) {
-        //$(form).ajaxSubmit();
-        var index = parent.layer.getFrameIndex(window.name);
+          ajaxSubmit();
+       var index = parent.layer.getFrameIndex(window.name);
         //parent.$('.btn-refresh').click();
         parent.layer.close(index);
+       
       }
     });
+    
+    function ajaxSubmit() {
+        $.ajax({
+            async : false,
+            cache : false,
+            type : 'POST',
+            data : $("#form-member-add").serialize(),
+            url : "${pageContext.request.contextPath}/Teacher/insert.do",//请求的action路径  
+            error : function() {//请求失败处理函数  
+                alert('失败');
+            },
+            success : function(data) { //请求成功后处理函数。    
+            	if(data==1){
+            		alert('添加成功');
+           
+            	}
+            	var index = parent.layer.getFrameIndex(window.name);
+                //parent.$('.btn-refresh').click();
+                parent.layer.close(index);
+                
+                
+            }
+        });
+    }
+    
   });
 </script>
 <!--/请在上方写此页面业务相关的脚本-->

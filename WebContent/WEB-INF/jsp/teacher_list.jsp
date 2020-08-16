@@ -5,7 +5,7 @@
 <%@page import="com.tech.ssm.domain.Teacher" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html id="teacherlist">
 <head>
   <meta charset="utf-8">
   <meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -105,7 +105,7 @@
         <td>19981497415</td>
         
         <td class="text-l">四川交通职业技术学院信息系</td>
-        <td class="td-status"><span class="label label-success radius">已启用</span></td>
+    
         <td class="td-manage">
 					<a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>
 					<a title="编辑" href="javascript:;" onclick="member_edit('编辑','teacher-edit.html','4','','510')" class="ml-5" style="text-decoration:none">

@@ -6,12 +6,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tech.ssm.domain.Teacher;
 import com.tech.ssm.service.TeacherService;
+
+import sun.nio.cs.ext.MacHebrew;
 
 @Controller
 @RequestMapping("/Teacher")
@@ -52,7 +55,10 @@ public class TeacherController {
 	
 	@RequestMapping(value="/insert.do")
 	@ResponseBody
-	private int Insert(Teacher teacher) {
+	private int Insert( Teacher teacher) {
+		String id=""+(int) (Math.random()*1000000);
+		System.out.println(id);
+		teacher.setTeacher_id(id);
 		return teacherservice.insert(teacher);
 		
 	}
