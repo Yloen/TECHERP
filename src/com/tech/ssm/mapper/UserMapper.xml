@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tech.ssm.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.tech.ssm.domain.User" >
+    <id column="UserId" property="UserId" jdbcType="VARCHAR" />
+    <result column="UserName" property="UserName" jdbcType="VARCHAR" />
+    <result column="UserPwd" property="UserPwd" jdbcType="VARCHAR" />
+    <result column="Status" property="Status" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="Category" type="com.tech.ssm.domain.UserCategory" extends="BaseResultMap">
+    <result column="CategoryID" property="CategoryID" jdbcType="INTEGER" />
+    <result column="CategoryName" property="CategoryName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+		UserId, UserName, UserPwd, user.CategoryId, CategoryName
+	</sql>
+  
+  <!-- 查询所有记录 -->
+	<select id="find" parameterType="com.tech.ssm.domain.User" resultMap="BaseResultMap">
+		SELECT
+			UserId,
+			UserName,
+			UserPwd,
+			Status,
+			user.CategoryId,
+			CategoryName
+		FROM
+		user
+		LEFT JOIN user_category ON user.CategoryId =user_category.CategoryId
+		
+	</select>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			user
+		WHERE
+			UserId IN
+		<foreach collection="array" item="UserId" open="(" close=")" separator=",">
+			#{UserId}
+		</foreach>
+	</delete>
+	
+	<!-- 修改状态，批量启用停用-->
+	<update id="changeStatus">
+		UPDATE user
+		SET Status = #{Status}
+		WHERE
+			UserId IN
+		<foreach collection="ids" item="UserId" open="(" close=")" separator=",">
+			#{UserId}
+		</foreach>
+	</update>
+	
+	<!-- 根据id查 -->
+	<select id="selectByID" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user,user_category
+		where UserId = #{UserId,jdbcType=VARCHAR} and user.CategoryId =user_category.CategoryId
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="deleteByID" parameterType="java.lang.String">
+		delete from user
+		where UserId = #{UserId,jdbcType=VARCHAR}
+	</delete>
+	
+	<!-- 增加 -->
+	<insert id="insert" parameterType="com.tech.ssm.domain.User">
+		insert into user (UserId, UserName,UserPwd,Status,CategoryId)
+		values (#{UserId,jdbcType=VARCHAR}, #{UserName,jdbcType=VARCHAR},
+		#{UserPwd,jdbcType=VARCHAR},#{Status,jdbcType=INTEGER},
+		#{CategoryId,jdbcType=INTEGER})
+	</insert>
+	
+	
+	<!-- 更新 -->
+	<update id="updateByID"
+		parameterType="com.tech.ssm.domain.User">
+		update user
+		set UserName = #{UserName,jdbcType=VARCHAR},
+		UserPwd = #{UserPwd,jdbcType=VARCHAR},
+		Status = #{Status,jdbcType=INTEGER},
+		CategoryId = #{CategoryId,jdbcType=INTEGER}
+		where UserId = #{UserId,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 模糊查询 -->
+	<select id="likeuser" resultMap="BaseResultMap" parameterType="com.tech.ssm.domain.User">
+		select
+		<include refid="Base_Column_List" />
+		from user,user_category
+		<where>
+		     <if test="0==0">
+				user.CategoryId =user_category.CategoryId
+			</if>
+		
+			<if test="UserId!=null and UserId!=''">
+				and UserId like concat("%",#{UserId},"%")
+			</if>
+			<if test="UserName!=null and UserName!=''">
+				and UserName like concat("%",#{UserName},"%")
+			</if>
+			<if test="Status!=null and Status!=''">
+				and Status like concat("%",#{Status},"%")
+			</if>
+			<if test="CategoryId!=null and CategoryId!=''">
+				and CategoryId like concat("%",#{CategoryId},"%")
+			</if>
+			
+		</where>
+	</select>
+	
+	<!-- 判断是否存在-->
+	
+	<select id="Existenceuser" resultMap="BaseResultMap" parameterType="com.tech.ssm.domain.User">
+		select
+		UserId,UserName
+		from user,user_category
+		<where>	
+			<if test="UserId!=null and UserId!=''">
+				or UserId =#{UserId}
+			</if>
+			<if test="UserName!=null and UserName!=''">
+				or UserName =#{UserName}
+			</if>
+		</where>
+	</select>
+	
+</mapper>

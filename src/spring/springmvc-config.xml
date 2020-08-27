@@ -12,7 +12,7 @@
 
 	<!-- 定义组件扫描器，指定需要扫描的包 -->
 	<context:component-scan
-		base-package="com.tech.ssm.controller" />
+		base-package="com.tech.ssm.controller.*" />
 	<!-- 配置注解驱动 -->
 	<mvc:annotation-driven />
 	
@@ -26,6 +26,8 @@
 	<mvc:resources mapping="/lib/**" location="/lib/" />
 	<mvc:resources mapping="/static/**" location="/static/" />
 	<mvc:resources mapping="/temp/**" location="/temp/" />
+	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/files/**" location="/files/" />
 	
 
 

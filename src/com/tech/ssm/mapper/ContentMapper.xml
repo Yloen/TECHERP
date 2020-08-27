@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tech.ssm.mapper.ContentMapper">
+	<resultMap id="BaseResultMap"
+		type="com.tech.ssm.domain.Content">
+		<id column="ContentId" property="ContentId" jdbcType="VARCHAR" />
+		<result column="Topic" property="Topic" jdbcType="VARCHAR" />
+		<result column="PublicDate" property="PublicDate"
+			jdbcType="VARCHAR" />
+		<result column="Content" property="Content" jdbcType="VARCHAR" />
+		<result column="Author" property="Author" jdbcType="VARCHAR" />
+		<result column="Status" property="Status" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="Category"
+		type="com.tech.ssm.domain.Operate_category" extends="BaseResultMap">
+		<result column="FId" property="CategoryId" jdbcType="INTEGER" />
+		<result column="CategoryName" property="CategoryName"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+
+
+	<sql id="Base_Column_List">
+		ContentId, Topic, PublicDate, Content,Status,
+		Author,FileSrc,PicSrc,content.CategoryId,CategoryName
+	</sql>
+	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+
+	<!-- 2=没有进入回收站，1=放入回收站 -->
+
+
+	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+	<!-- 查询所有记录（未删除） -->
+	<select id="find" parameterType="com.tech.ssm.domain.Content"
+		resultMap="BaseResultMap">
+		SELECT
+		ContentId,
+		Topic,
+		Content,
+		PublicDate,
+		Content,
+		Status,
+		Author,
+		FileSrc,
+		Status,
+		PicSrc,
+		CategoryName,
+		content.CategoryId
+		FROM
+		content
+		LEFT JOIN operate_category ON content.CategoryId
+		=operate_category.FId
+		where Status=2
+	</select>
+
+	<!-- 查询所有记录（已删除） -->
+	<select id="findRecovery"
+		parameterType="com.tech.ssm.domain.Content" resultMap="BaseResultMap">
+		SELECT
+		ContentId,
+		Topic,
+		Content,
+		PublicDate,
+		Content,
+		Status,
+		Author,
+		FileSrc,
+		Status,
+		PicSrc,
+		CategoryName,
+		content.CategoryId
+		FROM
+		content
+		LEFT JOIN operate_category ON content.CategoryId
+		=operate_category.FId
+		where Status=1
+	</select>
+
+	<!-- 伪删除 -->
+	<update id="Recovery" parameterType="java.lang.String">
+		update content
+		set Status = 1
+		where ContentId = #{ContentId,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 伪删除（多） -->
+	<update id="RecoveryBatch">
+		update content
+		set Status = 1
+		where ContentId IN
+		<foreach collection="array" item="ContentId" open="("
+			close=")" separator=",">
+			#{ContentId}
+		</foreach>
+	</update>
+
+	<!-- 删除 -->
+	<delete id="deleteByID" parameterType="java.lang.String">
+		delete from content
+		where
+		ContentId = #{ContentId,jdbcType=VARCHAR}
+	</delete>
+
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+		content
+		WHERE
+		ContentId IN
+		<foreach collection="array" item="ContentId" open="("
+			close=")" separator=",">
+			#{ContentId}
+		</foreach>
+	</delete>
+
+
+	<!-- 撤销 -->
+	<update id="Revocation" parameterType="java.lang.String">
+		update content
+		set Status =
+		2
+		where ContentId = #{ContentId,jdbcType=VARCHAR}
+	</update>
+
+
+
+	<!-- 根据id查 -->
+	<select id="selectByID" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from content,operate_category
+		where ContentId =
+		#{ContentId,jdbcType=VARCHAR} and content.CategoryId
+		=operate_category.FId
+	</select>
+
+
+	<!-- 模糊查询 -->
+	<select id="likecontent" resultMap="BaseResultMap"
+		parameterType="com.tech.ssm.domain.Content">
+		select
+		<include refid="Base_Column_List" />
+		from content,operate_category
+		<where>
+			<if test="0==0">
+				content.CategoryId =operate_category.FId
+			</if>
+
+			<if test="ContentId!=null and ContentId!=''">
+				and ContentId like concat("%",#{ContentId},"%")
+			</if>
+			<if test="Topic!=null and Topic!=''">
+				and Topic like concat("%",#{Topic},"%")
+			</if>
+			<if test="Status!=null and Status!=''">
+				and Status = #{Status}
+			</if>
+
+		</where>
+	</select>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.tech.ssm.domain.Content">
+		insert into content
+		(ContentId,Topic,PublicDate,Content,Status,Author,FileSrc,PicSrc,CategoryId)
+		values
+		(#{ContentId},#{Topic},#{PublicDate},#{Content},2,#{Author},#{FileSrc},#{PicSrc},#{CategoryId})
+	</insert>
+
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.tech.ssm.domain.Content">
+		update content
+		<set>
+
+			<if test="ContentId != null">
+				ContentId = #{ContentId},
+			</if>
+			<if test="Topic != null">
+				Topic = #{Topic},
+			</if>
+			<if test="PublicDate != null">
+				PublicDate = #{PublicDate},
+			</if>
+			<if test="Content != null">
+				Content = #{Content},
+			</if>
+			<if test="Author != null">
+				Author = #{Author},
+			</if>
+			<if test="FileSrc != null">
+				FileSrc = #{FileSrc},
+			</if>
+			<if test="PicSrc != null">
+				PicSrc = #{PicSrc},
+			</if>
+			<if test="CategoryId != null">
+				CategoryId = #{CategoryId},
+			</if>
+		</set>
+	</update>
+
+</mapper>

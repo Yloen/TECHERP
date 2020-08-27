@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tech.ssm.mapper.DepartmentMapper">
+  <resultMap id="BaseResultMap" type="com.tech.ssm.domain.Department">
+    <!--
+		这个元素是由MyBatis生成器自动生成的映射
+    -->
+    <id column="DepartmentId" jdbcType="VARCHAR" property="DepartmentId" />
+    <result column="DepartmentName" jdbcType="VARCHAR" property="DepartmentName" />
+    <result column="Leader" jdbcType="VARCHAR" property="Leader" />
+    <result column="Content" jdbcType="VARCHAR" property="Content" />
+    <result column="Fid" jdbcType="VARCHAR" property="Fid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DepartmentId, DepartmentName, Leader, Content, Fid
+  </sql>
+  <!-- 查询所有记录 -->
+	<select id="find" parameterType="com.tech.ssm.domain.Department"
+		resultMap="BaseResultMap">
+		SELECT
+		DepartmentId,
+		DepartmentName,
+		Leader, 
+		Content, 
+		Fid
+		FROM
+		department
+	</select>
+  <!-- 根据主键删除数据  -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from department
+    where DepartmentId = #{DepartmentId,jdbcType=VARCHAR}
+  </delete>
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+		department
+		WHERE
+		DepartmentId IN
+		<foreach collection="array" item="DepartmentId" open="(" close=")"
+			separator=",">
+			#{DepartmentId}
+		</foreach>
+	</delete>
+  <!-- 添加数据 -->
+  <insert id="insert" parameterType="com.tech.ssm.domain.Department">
+    insert into department (DepartmentId, DepartmentName, Leader, 
+      Content, Fid)
+    values (#{DepartmentId,jdbcType=VARCHAR}, #{DepartmentName,jdbcType=VARCHAR}, #{Leader,jdbcType=VARCHAR}, 
+      #{Content,jdbcType=VARCHAR}, #{Fid,jdbcType=VARCHAR})
+  </insert>
+   <!-- 数据添加前判断 -->
+  <insert id="insertSelective" parameterType="com.tech.ssm.domain.Department">
+    insert into department
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="DepartmentId != null">
+        DepartmentId,
+      </if>
+      <if test="DepartmentName != null">
+        DepartmentName,
+      </if>
+      <if test="Leader != null">
+        Leader,
+      </if>
+      <if test="Content != null">
+        Content,
+      </if>
+      <if test="Fid != null">
+        Fid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="DepartmentId != null">
+        #{DepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="DepartmentName != null">
+        #{DepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="Leader != null">
+        #{Leader,jdbcType=VARCHAR},
+      </if>
+      <if test="Content != null">
+        #{Content,jdbcType=VARCHAR},
+      </if>
+      <if test="Fid != null">
+        #{Fid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!-- 根据主键查询数据  -->
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from department
+    where DepartmentId = #{DepartmentId,jdbcType=VARCHAR}
+  </select>
+	<!--修改数据 -->  
+  <update id="updateByPrimaryKey" parameterType="com.tech.ssm.domain.Department">
+    update department
+    set DepartmentName = #{DepartmentName,jdbcType=VARCHAR},
+      Leader = #{Leader,jdbcType=VARCHAR},
+      Content = #{Content,jdbcType=VARCHAR},
+      Fid = #{Fid,jdbcType=VARCHAR}
+    where DepartmentId = #{DepartmentId,jdbcType=VARCHAR}
+  </update>
+  <!-- 模糊查询 -->
+	<select id="likedepartment" resultMap="BaseResultMap"
+		parameterType="com.tech.ssm.domain.Department">
+		select
+		<include refid="Base_Column_List" />
+		from department
+		<where>
+			
+			<if test="DepartmentId!=null and DepartmentId!=''">
+				and DepartmentId like concat("%",#{DepartmentId},"%")
+			</if>
+			<if test="DepartmentName!=null and DepartmentName!=''">
+				and DepartmentName like concat("%",#{DepartmentName},"%")
+			</if>
+			<if test="Leader!=null and Leader!=''">
+				and Leader like concat("%",#{Leader},"%")
+			</if>
+			<if test="Content!=null and Content!=''">
+				and Content like concat("%",#{Content},"%")
+			</if>
+			<if test="Fid!=null and Fid!=''">
+				and Fid like concat("%",#{Fid},"%")
+			</if>
+		</where>
+	</select>
+</mapper>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tech.ssm.mapper.AdminMapper">
+  <resultMap id="BaseResultMap" type="com.tech.ssm.domain.Admin">
+    <!--
+		这个元素是由MyBatis生成器自动生成的映射
+    -->
+    <id column="AdminId" jdbcType="INTEGER" property="AdminId" />
+    <result column="AdminName" jdbcType="VARCHAR" property="AdminName" />
+    <result column="AdminPwd" jdbcType="VARCHAR" property="AdminPwd" />
+    <result column="CategoryId" jdbcType="INTEGER" property="CategoryId" />
+    <result column="Status" jdbcType="INTEGER" property="Status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    AdminId, AdminName, AdminPwd, admin.CategoryId, Status,user_category.CategoryName
+  </sql>
+  <!-- 查询所有记录 -->
+	<select id="find" parameterType="com.tech.ssm.domain.Admin"
+		resultMap="BaseResultMap">
+		SELECT
+			AdminId,
+			AdminName,
+			AdminPwd, 
+			admin.CategoryId,
+			Status,
+			user_category.CategoryName
+		FROM
+		admin
+		LEFT JOIN user_category ON admin.CategoryId =user_category.CategoryId
+	</select>
+  <!-- 根据主键删除数据  -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from admin
+    where AdminId = #{AdminId,jdbcType=INTEGER}
+  </delete>
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+		admin
+		WHERE
+			AdminId IN
+		<foreach collection="array" item="AdminId" open="(" close=")" separator=",">
+			#{AdminId}
+		</foreach>
+	</delete>
+  <!-- 添加数据 -->
+  <insert id="insert" parameterType="com.tech.ssm.domain.Admin">
+    insert into admin (AdminId, AdminName, AdminPwd, 
+      CategoryId, Status)
+    values (#{AdminId,jdbcType=INTEGER}, #{AdminName,jdbcType=VARCHAR}, #{AdminPwd,jdbcType=VARCHAR}, 
+      #{CategoryId,jdbcType=INTEGER}, #{Status,jdbcType=INTEGER})
+  </insert>
+   <!-- 数据添加前判断 -->
+  <insert id="insertSelective" parameterType="com.tech.ssm.domain.Admin">
+    insert into admin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="AdminId != null">
+        AdminId,
+      </if>
+      <if test="AdminName != null">
+        AdminName,
+      </if>
+      <if test="AdminPwd != null">
+        AdminPwd,
+      </if>
+      <if test="CategoryId != null">
+        CategoryId,
+      </if>
+      <if test="Status != null">
+        Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="AdminId != null">
+        #{AdminId,jdbcType=INTEGER},
+      </if>
+      <if test="AdminName != null">
+        #{AdminName,jdbcType=VARCHAR},
+      </if>
+      <if test="AdminPwd != null">
+        #{AdminPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="CategoryId != null">
+        #{CategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="Status != null">
+        #{Status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <!-- 根据主键查询数据  -->
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+	LEFT JOIN user_category ON admin.CategoryId =user_category.CategoryId
+    where AdminId = #{AdminId,jdbcType=INTEGER}
+  </select>
+	<!--修改数据 -->  
+ 
+   <update id="updateByPrimaryKey" parameterType="com.tech.ssm.domain.Admin">
+		update admin
+		 <set>
+     <if test="AdminName!=null and AdminName !=''">
+     AdminName=#{AdminName},
+     </if>
+     <if test="AdminPwd!=null and AdminPwd !=''">
+     AdminPwd=#{AdminPwd},
+     </if>
+     <if test="CategoryId!=null and CategoryId !=''">
+     CategoryId=#{CategoryId},
+     </if>
+     <if test="Status!=null and Status !=''">
+     Status=#{Status},
+     </if>
+    
+     
+     </set>
+     where AdminId=#{AdminId}
+</update>
+
+  
+  <!--修改密码 -->  
+  <update id="updateNewPassword" parameterType="java.lang.String">
+    update admin
+    set AdminPwd = #{AdminPwd,jdbcType=VARCHAR}
+    where AdminId = #{AdminId,jdbcType=INTEGER}
+  </update>
+  <!-- 模糊查询 -->
+	<select id="likeadmin" resultMap="BaseResultMap" parameterType="com.tech.ssm.domain.Admin">
+		select
+		<include refid="Base_Column_List" />
+		from admin,user_category
+		<where>
+		     <if test="0==0">
+				admin.CategoryId =user_category.CategoryId
+			</if>
+		
+			<if test="AdminId!=null and AdminId!=''">
+				and AdminId like concat("%",#{AdminId},"%")
+			</if>
+			<if test="AdminName!=null and AdminName!=''">
+				and AdminName like concat("%",#{AdminName},"%")
+			</if>
+			<if test="Status!=null and Status!=''">
+				and Status like concat("%",#{Status},"%")
+			</if>
+			<if test="CategoryId!=null and CategoryId!=''">
+				and CategoryId like concat("%",#{CategoryId},"%")
+			</if>
+			
+		</where>
+	</select>
+</mapper>

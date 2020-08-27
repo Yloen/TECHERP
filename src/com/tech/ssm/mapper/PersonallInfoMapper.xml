@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tech.ssm.mapper.PersonallInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.tech.ssm.domain.PersonallInfo" >
+    <id column="UserId" property="UserId" jdbcType="VARCHAR" />
+    <result column="PersonalId" property="PersonalId" jdbcType="VARCHAR" />
+    <result column="DepartmentId" property="DepartmentId" jdbcType="VARCHAR" />
+    <result column="Name" property="Name" jdbcType="VARCHAR" />
+    <result column="Photo" property="Photo" jdbcType="VARCHAR" />
+    <result column="Sex" property="Sex" jdbcType="VARCHAR" />
+    <result column="Content" property="Content" jdbcType="VARCHAR" />
+  </resultMap>
+    <resultMap id="Department" type="com.tech.ssm.domain.Department" extends="BaseResultMap">
+    <result column="DepartmentName" jdbcType="VARCHAR" property="DepartmentName" />
+    <result column="Leader" jdbcType="VARCHAR" property="Leader" />
+    <result column="Content" jdbcType="VARCHAR" property="Content" />
+    <result column="Fid" jdbcType="VARCHAR" property="Fid" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+		UserId, PersonalId, DepartmentId, Name , Sex , Photo ,Content
+	</sql>
+  
+  <!-- 查询所有记录 -->
+	<select id="findPersonallInfo" parameterType="com.tech.ssm.domain.PersonallInfo" resultMap="BaseResultMap">
+		SELECT
+		*
+		FROM
+		personallinfo	
+	</select>
+	
+	
+	<!-- 根据id查 -->
+	<select id="selectPersonByID" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from personallinfo
+		where UserId = #{UserId,jdbcType=VARCHAR} or PersonalId = #{PersonalId,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="deletePersonByID" parameterType="java.lang.String">
+		delete from personallinfo
+		where PersonalId = #{PersonalId,jdbcType=VARCHAR}
+	</delete>
+
+	<!-- 更新 -->
+	<update id="updatePersonByID"
+		parameterType="com.tech.ssm.domain.PersonallInfo">
+		update personallinfo
+		 <set>
+     <if test="Name!=null and Name !=''">
+     Name=#{Name},
+     </if>
+     <if test="Sex!=null and Sex !=''">
+     Sex=#{Sex},
+     </if>
+     <if test="Photo!=null and Photo !=''">
+     Photo=#{Photo},
+     </if>
+     <if test="Content!=null and Content !=''">
+     Content=#{Content},
+     </if>
+     </set>
+     where UserId=#{UserId} or PersonalId=#{PersonalId}
+	</update>
+
+		<!-- 增加 -->
+	<insert id="insertPerson" parameterType="com.tech.ssm.domain.PersonallInfo">
+		insert into personallinfo (UserId, PersonalId, DepartmentId, Name , Sex , Photo ,Content)
+		values (#{UserId,jdbcType=VARCHAR}, #{PersonalId,jdbcType=VARCHAR},
+		#{DepartmentId,jdbcType=VARCHAR},#{Name,jdbcType=INTEGER},#{Sex,jdbcType=INTEGER},
+		#{Photo,jdbcType=INTEGER},
+		#{Content,jdbcType=INTEGER})
+	</insert>
+	<select id="Existenceuser" resultMap="BaseResultMap" parameterType="com.tech.ssm.domain.PersonallInfo">
+		select
+		PersonalId,Name
+		from personallinfo
+		<where>	
+			<if test="PersonalId!=null and PersonalId!=''">
+				or PersonalId =#{PersonalId}
+			</if>
+			<if test="Name!=null and Name!=''">
+				or Name =#{Name}
+			</if>
+		</where>
+	</select>
+	<!-- 模糊查询 -->
+	<select id="likepersonallInfo" resultMap="BaseResultMap" parameterType="com.tech.ssm.domain.PersonallInfo">
+		select
+		<include refid="Base_Column_List" />
+		from personallinfo
+		<where>
+
+			<if test="UserId!=null and UserId!=''">
+				and UserId like concat("%",#{UserId},"%")
+			</if>
+			<if test="Name!=null and Name!=''">
+				and Name like concat("%",#{Name},"%")
+			</if>
+			<if test="PersonalId!=null and PersonalId!=''">
+				and PersonalId like concat("%",#{PersonalId},"%")
+			</if>
+			<if test="DepartmentId!=null and DepartmentId!=''">
+				and DepartmentId like concat("%",#{DepartmentId},"%")
+			</if>
+			<if test="Sex!=null and Sex!=''">
+				and Sex like concat("%",#{Sex},"%")
+			</if>
+			<if test="Photo!=null and Photo!=''">
+				and Photo like concat("%",#{Photo},"%")
+			</if>
+			<if test="Content!=null and Content!=''">
+				and	Contentlike concat("%",#{Content},"%")
+			</if>
+			
+		</where>
+	</select>
+		<!-- 批量删除 -->
+	<delete id="deletePersonBatch">
+		DELETE
+		FROM
+			personallinfo
+		WHERE
+			PersonalId IN
+		<foreach collection="array" item="PersonalId" open="(" close=")" separator=",">
+			#{PersonalId}
+		</foreach>
+	</delete>
+</mapper>
