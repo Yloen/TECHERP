@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tech.ssm.mapper.RoleMapper" >
+<!--  <resultMap id="Identity" type="com.tech.ssm.domain.Identity" extends="BaseResultMap">
+   
+  </resultMap>
+  -->
+  <!-- 查询所有角色 -->
+	<select id="findIdentity" parameterType="com.tech.ssm.domain.Identity" resultMap="BaseResultMap">
+		SELECT * FROM identity
+	</select>
+	<resultMap type="com.tech.ssm.domain.Identity" id="BaseResultMap">
+	<result column="IdentityId" property="IdentityId" jdbcType="VARCHAR" />
+    <result column="IdentityName" property="IdentityName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- 给用户添加角色 -->
+	<insert id="insertRole" parameterType="com.tech.ssm.domain.UserIdentity">
+		insert into useridentity (UserId, IdentityId)
+		values (#{UserId,jdbcType=VARCHAR}, #{IdentityId,jdbcType=VARCHAR})
+	</insert>
+	
+	<!--  查询用户身份表的用户id、身份id -->
+	<select id="findUserIdentity" resultMap="IdentityResultMap">
+		SELECT * FROM useridentity,identity where useridentity.IdentityId=identity.IdentityId
+	</select>
+	<resultMap type="com.tech.ssm.domain.UserIdentity" id="IdentityResultMap">
+	<result column="IdentityId" property="IdentityId" jdbcType="VARCHAR" />
+    <result column="UserId" property="UserId" jdbcType="VARCHAR" />
+    <result column="IdentityName" property="IdentityName" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- 更新角色 -->
+	<update id="RoleUpdate"
+		parameterType="java.lang.String">
+		update useridentity
+		set IdentityId = #{identityId,jdbcType=VARCHAR}
+		where UserId = #{userId,jdbcType=VARCHAR}
+	</update>
+</mapper>

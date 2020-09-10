@@ -149,6 +149,23 @@
 			</dd>
 		</dl>
 		
+		
+		<dl id="menu-Authority">
+			<dt>
+				<i class="Hui-iconfont">&#xe62e;</i> 权限管理<i
+					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+			</dt>
+			<dd>
+				<ul>
+				<li><a data-href="${pageContext.request.contextPath}/Role/List.do" data-title="角色管理"
+						href="javascript:void(0)">角色管理</a></li>
+				
+					<li><a data-href="${pageContext.request.contextPath}/Menu/List.do" data-title="菜单管理"
+						href="javascript:void(0)">菜单管理</a></li>
+				</ul>
+			</dd>
+		</dl>
+		
 		<dl id="menu-recovery">
 			<dt>
 				<i class="Hui-iconfont">&#xe62e;</i>回收站<i

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tech.ssm.mapper.MenuMapper">
+	<resultMap id="BaseResultMap"
+		type="com.tech.ssm.domain.Menu">
+		<id column="MenuId" property="MenuId" jdbcType="VARCHAR" />
+		<result column="MenuName" property="MenuName" jdbcType="VARCHAR" />
+		<result column="MenuTag" property="MenuTag"
+			jdbcType="VARCHAR" />
+		<result column="MenuValue" property="MenuValue" jdbcType="VARCHAR" />
+		<result column="MenuSrc" property="MenuSrc" jdbcType="VARCHAR" />
+		<result column="PicSrc" property="PicSrc" jdbcType="VARCHAR" />
+		<result column="Status" property="Status" jdbcType="INTEGER" />
+		<result column="FId" property="Fid" jdbcType="VARCHAR" />
+		<result column="Content" property="Content" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="Category"
+		type="com.tech.ssm.domain.Operate_category" extends="BaseResultMap">
+		<result column="CategoryId" property="CategoryId" jdbcType="INTEGER" />
+		<result column="CategoryName" property="CategoryName"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+
+
+	<sql id="Base_Column_List">
+		MenuId, MenuName, MenuTag, MenuValue,MenuSrc,
+		PicSrc,Status,Menu.Fid,Content,Menu.CategoryId,CategoryName
+	</sql>
+	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+
+	<!-- 2=没有进入回收站，1=放入回收站 -->
+
+
+	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+	<!-- 查询所有记录（未删除） -->
+	<select id="find" parameterType="com.tech.ssm.domain.Menu"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		menu
+		LEFT JOIN operate_category ON menu.CategoryId
+		=operate_category.CategoryId
+		where Status=2
+	</select>
+
+	<!-- 查询所有记录（已删除） -->
+	<select id="findRecovery"
+		parameterType="com.tech.ssm.domain.Menu" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		menu
+		LEFT JOIN operate_category ON menu.CategoryId
+		=operate_category.CategoryId
+		where Status=1
+	</select>
+
+	<!-- 伪删除 -->
+	<update id="Recovery" parameterType="java.lang.String">
+		update menu
+		set Status = 1
+		where MenuId = #{MenuId,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 伪删除（多） -->
+	<update id="RecoveryBatch">
+		update menu
+		set Status = 1
+		where MenuId IN
+		<foreach collection="array" item="MenuId" open="("
+			close=")" separator=",">
+			#{MenuId}
+		</foreach>
+	</update>
+
+	<!-- 删除 -->
+	<delete id="deleteByID" parameterType="java.lang.String">
+		delete from menu
+		where
+		MenuId = #{MenuId,jdbcType=VARCHAR}
+	</delete>
+
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+		menu
+		WHERE
+		MenuId IN
+		<foreach collection="array" item="MenuId" open="("
+			close=")" separator=",">
+			#{MenuId}
+		</foreach>
+	</delete>
+
+
+	<!-- 撤销 -->
+	<update id="Revocation" parameterType="java.lang.String">
+		update menu
+		set Status =
+		2
+		where MenuId = #{MenuId,jdbcType=VARCHAR}
+	</update>
+
+
+
+	<!-- 根据id查 -->
+	<select id="selectByID" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from menu,operate_category
+		where MenuId =
+		#{MenuId,jdbcType=VARCHAR} and menu.CategoryId
+		=operate_category.CategoryId
+	</select>
+
+
+	<!-- 模糊查询 -->
+	<select id="likemenu" resultMap="BaseResultMap"
+		parameterType="com.tech.ssm.domain.Menu">
+		select
+		<include refid="Base_Column_List" />
+		from menu,operate_category
+		<where>
+			<if test="0==0">
+				menu.CategoryId =operate_category.CategoryId
+			</if>
+
+			<if test="MenuId!=null and MenuId!=''">
+				and MenuId like concat("%",#{MenuId},"%")
+			</if>
+			<if test="MenuName!=null and MenuName!=''">
+				and MenuName like concat("%",#{MenuName},"%")
+			</if>
+			<if test="Status!=null and Status!=''">
+				and Status = #{Status}
+			</if>
+
+		</where>
+	</select>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.tech.ssm.domain.Menu">
+		insert into menu
+		(MenuId,MenuName,MenuTag,MenuValue,MenuSrc,Status,PicSrc,Fid,Content,CategoryId)
+		values
+		(#{MenuId},#{MenuName},#{MenuTag},#{MenuValue},#{MenuSrc},2,#{PicSrc},#{Fid},#{Content},#{CategoryId})
+	</insert>
+
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.tech.ssm.domain.Menu">
+		update menu
+		<set>
+
+			<if test="MenuId != null">
+				MenuId = #{MenuId},
+			</if>
+			<if test="MenuName != null">
+				MenuName = #{MenuName},
+			</if>
+			<if test="MenuTag != null">
+				MenuTag = #{MenuTag},
+			</if>
+			<if test="MenuValue != null">
+				MenuValue = #{MenuValue},
+			</if>
+			<if test="MenuSrc != null">
+				MenuSrc = #{MenuSrc},
+			</if>
+			<if test="PicSrc != null">
+				PicSrc = #{PicSrc},
+			</if>
+			<if test="Fid != null">
+				Fid = #{Fid},
+			</if>
+			<if test="Content != null">
+				Content = #{Content},
+			</if>
+			<if test="CategoryId != null">
+				CategoryId = #{CategoryId},
+			</if>
+		</set>
+	</update>
+
+</mapper>
