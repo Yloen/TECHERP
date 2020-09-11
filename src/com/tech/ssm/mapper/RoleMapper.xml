@@ -38,4 +38,26 @@
 		set IdentityId = #{identityId,jdbcType=VARCHAR}
 		where UserId = #{userId,jdbcType=VARCHAR}
 	</update>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			useridentity
+		WHERE
+			UserId IN
+		<foreach collection="array" item="UserId" open="(" close=")" separator=",">
+			#{UserId}
+		</foreach>
+	</delete>
+	
+	
+	
+	<!-- 删除 -->
+	<delete id="deleteByID" parameterType="java.lang.String">
+		delete from useridentity
+		where UserId = #{UserId,jdbcType=VARCHAR}
+	</delete>
+	
+	
 </mapper>

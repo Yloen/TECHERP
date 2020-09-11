@@ -66,7 +66,7 @@
 			</a> <a href="javascript:;"
 				onclick="member_add('添加用户','${pageContext.request.contextPath}/Menu/Menu_add','','510')"
 				class="btn btn-primary radius"> <i class="Hui-iconfont">&#xe600;</i>
-					添加用户
+					添加菜单
 			</a> </span> <span class="r">共有用户：<strong>88</strong> 名
 			</span>
 		</div>

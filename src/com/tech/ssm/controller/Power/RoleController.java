@@ -22,7 +22,7 @@ public class RoleController {
 	private RoleService roleService;
 	@Autowired
 	private UserService userservice;
-	
+
 	/*
 	 * 现有用户展示
 	 */
@@ -31,29 +31,43 @@ public class RoleController {
 		/**
 		 * 查询用户身份表的用户id、身份id
 		 */
-		List<UserIdentity> userIdentity=roleService.findUserIdentity();
+		List<UserIdentity> userIdentity = roleService.findUserIdentity();
 		session.setAttribute("userlist", userIdentity);
 		return "Role/role_list";
 	}
-	
+
 	/*
 	 * 角色名称展示
 	 */
 	@RequestMapping("/Role_show")
-	public String RoseShow(HttpSession session,String UserId) {
+	public String RoseShow(HttpSession session, String UserId) {
 		List<Identity> identity = roleService.findIdentity();
 		System.out.println(identity);
 		session.setAttribute("identity", identity);
 		session.setAttribute("userId", UserId);
 		return "Role/role_edit";
 	}
+
 	/*
 	 * 角色修改
 	 */
 	@RequestMapping("/Role_update")
 	@ResponseBody
-	public int RoleUpdate(String UserId,String IdentityId) {
-		return roleService.RoleUpdate(UserId,IdentityId);
+	public int RoleUpdate(String UserId, String IdentityId) {
+		return roleService.RoleUpdate(UserId, IdentityId);
 	}
-	
+
+	// 删除多
+	@RequestMapping("/Role_DeleteBatch")
+	@ResponseBody
+	public int deleteBatch(String[] ids) {
+		return roleService.deleteBatch(ids);
+	}
+
+	// 删除
+	@RequestMapping("/Role_Delete")
+	@ResponseBody
+	public int User(String UserId) {
+		return roleService.deleteByID(UserId);
+	}
 }

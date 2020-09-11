@@ -45,6 +45,18 @@ public class RoleServiceImpl implements RoleService{
 		// TODO Auto-generated method stub
 		return roleMapper.RoleUpdate(userId,identityId);
 	}
+
+	@Override
+	public int deleteBatch(String[] ids) {
+		// TODO 自动生成的方法存根
+		return roleMapper.deleteBatch(ids);
+	}
+
+	@Override
+	public int deleteByID(String UserId) {
+		// TODO 自动生成的方法存根
+		return roleMapper.deleteByID(UserId);
+	}
 	
 
 	

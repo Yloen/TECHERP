@@ -63,14 +63,14 @@ public class ContentController {
 					dirPath = request.getServletContext().getRealPath("/images/");
 
 					// 获取图片位置
-					content.setPicSrc( originalFilename);
+					content.setPicSrc(originalFilename);
 				} else {
 					dirPath = request.getServletContext().getRealPath("/files/");
 					// 获取文件位置
-					content.setFileSrc( originalFilename);
+					content.setFileSrc(originalFilename);
 				}
 				System.out.println(dirPath);
-				if(dirPath!=null){
+				if (dirPath != null) {
 					File filePath = new File(dirPath);
 					// 如果保存文件的地址不存在，就先创建目录
 					if (!filePath.exists()) {
@@ -81,13 +81,13 @@ public class ContentController {
 						file.transferTo(new File(dirPath + originalFilename));
 					} catch (Exception e) {
 						e.printStackTrace();
-					}	
+					}
 				}
-				
+
 			}
 			// 跳转到成功页面
-			int i=contentservice.insert(content);
-			if(i==1) {
+			int i = contentservice.insert(content);
+			if (i == 1) {
 				return "ok";
 			}
 			return "error";

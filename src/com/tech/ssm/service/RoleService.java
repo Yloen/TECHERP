@@ -10,24 +10,34 @@ public interface RoleService {
 	 * 查询角色
 	 */
 	List<Identity> findIdentity();
-	
+
 	/**
 	 * 给用户添加身份
+	 * 
 	 * @param userIdentity
 	 */
 	void insertRole(UserIdentity userIdentity);
-	
+
 	/**
 	 * 查询用户身份表的用户id、身份id
+	 * 
 	 * @return
 	 */
 	List<UserIdentity> findUserIdentity();
-	
+
 	/**
 	 * 修改身份
+	 * 
 	 * @param userId
 	 * @param identityId
 	 * @return
 	 */
 	int RoleUpdate(String userId, String identityId);
+
+	// 批量删除
+	int deleteBatch(String[] ids);
+
+	// 删除byid
+	int deleteByID(String UserId);
+
 }

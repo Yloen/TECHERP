@@ -211,7 +211,7 @@
     layer.confirm('确认要删除吗？', function (index) {
       $.ajax({
         type: 'POST',
-        url: '${pageContext.request.contextPath}/User/User_Delete?UserId='+id,
+        url: '${pageContext.request.contextPath}/Role/Role_Delete?UserId='+id,
         dataType: 'json',
         success: function (data) {
           $(obj).parents("tr").remove();
@@ -245,7 +245,7 @@
    console.log("选中值："+ ids);
  
      if (confirm("是否 删除?")){
-       $.post ("${pageContext.request.contextPath}/User/User_DeleteBatch", {"ids":ids},
+       $.post ("${pageContext.request.contextPath}/Role/Role_DeleteBatch", {"ids":ids},
        function (data){
       if (data>0) {
          alert("删除成功");
